@@ -98,7 +98,7 @@ Status GetElem(constLinkList L, int i, ElemType *e)
     }
     // 上述循环结束有两种情况(两种情况 i 的值都不合理): 
     // 1.p到了最后一个节点的指针域(NULL)  说明输入 i 值大于链表长度，i 偏大
-    // 2.输入i为0或复数, 这时 j > i(这种情况其实可以在最前面写，但是两个都返回ERROR的分支写在一起更美观), i 偏小
+    // 2.输入i为 0或负数, 这时 j > i(这种情况其实可以在最前面写，但是两个都返回ERROR的分支写在一起更美观), i 偏小
     if (!p || j > i)  
     {
         return ERROR;
