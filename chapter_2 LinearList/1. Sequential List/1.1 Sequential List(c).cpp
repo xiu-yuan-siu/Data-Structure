@@ -1,6 +1,6 @@
 #include <cstdio>
 #include <cstdlib>
-#include "../Status.h"
+#include "../../Status.h"
 
 #define LIST_INIT_SIZE 100   // 线性表存储空间的初始分配量
 #define LISTINCREMENT 10     // 线性表存储空间的分配增量

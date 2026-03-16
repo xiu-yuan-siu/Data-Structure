@@ -1,6 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include "../Status.h"
+#include "../../Status.h"
 
 #define MAXSIZE 1000  // 链表最大长度
 
