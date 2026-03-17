@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <assert.h>  // 调试
-#include "../Status.h"
+#include "../../Status.h"
 
 typedef int ElemType;  // 这里可以自定义 ElemType
 

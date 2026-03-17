@@ -16,16 +16,8 @@
 #define FALSE       0   // 假/否
 #define OK          1   // 通过/成功
 #define ERROR       0   // 错误/失败
-
-//系统中已有此状态码定义，要防止冲突
-#ifndef OVERFLOW
-#define OVERFLOW    -2  //堆栈上溢
-#endif
-
-//系统中已有此状态码定义，要防止冲突
-#ifndef NULL
-#define NULL ((void*)0)
-#endif
+#define INFEASIBLE  -1  // 不可行的
+#define OVERFLOW    -2  // 堆栈上溢
 
 /* 状态码类型 */
 typedef int Status;
