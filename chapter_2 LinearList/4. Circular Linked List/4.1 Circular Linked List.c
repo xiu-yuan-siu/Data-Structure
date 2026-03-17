@@ -129,10 +129,6 @@ Status NextElem(LinkList L, const ElemType *cur_e, ElemType *next_e)
 
 Status ListInsert(LinkList *L, int i, const ElemType *e)
 {
-    if (i < 1)
-    {
-        return ERROR;
-    }
     LNode *head = (*L)->next;
     LNode *p = head;  // 从头结点开始，与 j = 0对应
     int j = 0;
@@ -159,10 +155,6 @@ Status ListInsert(LinkList *L, int i, const ElemType *e)
 
 Status ListDelete(LinkList *L, int i, ElemType *e)
 {
-    if (i < 1)
-    {
-        return ERROR;
-    }
     LNode *head = (*L)->next;
     LNode *p = head;
     int j = 0;
