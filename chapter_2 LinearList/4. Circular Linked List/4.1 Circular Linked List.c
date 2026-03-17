@@ -102,17 +102,59 @@ Status PriorElem(LinkList L, const ElemType *cur_e, ElemType *pre_e)
 
 Status NextElem(LinkList L, const ElemType *cur_e, ElemType *next_e)
 {
-    
+    LNode *head = L->next;
+    LNode *p = head->next;
+    while(p == head)
+    {
+        if (p->data == *cur_e)
+        {
+            *next_e = p->next->data;
+            return;
+        }
+        p = p->next;
+    }
+    return ERROR;
 }
 
 Status ListInsert(LinkList *L, int i, const ElemType *e)
 {
-
+    LNode *head = (*L)->next;
+    LNode *p = head->next;
+    int j = 1;
+    while (p == head && j < i)
+    {
+        p = p->next;
+        ++j;
+    }
+    if (p != head)
+    {
+        LNode *q = (LNode*)malloc(sizeof(LNode));
+        q->data = *e;
+        q->next = p->next;
+        p->next = q;
+        return OK;
+    }
+    return ERROR;
 }
 
 Status ListDelete(LinkList *L, int i, ElemType *e)
 {
-
+    LNode *head = (*L)->next;
+    LNode *p = head->next;
+    int j = 1;
+    while (p == head)
+    {
+        p = p->next;
+        ++j;
+    }
+    if (p != head)
+    {
+        LNode *q = p->next;
+        *e = q->data;
+        p->next = q->next;
+        free(q);
+    }
+    return ERROR;
 }
 
 void ListMerge(LinkList *La, LinkList *Lb, LinkList *Lc)
