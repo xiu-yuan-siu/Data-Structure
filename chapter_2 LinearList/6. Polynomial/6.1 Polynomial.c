@@ -30,8 +30,8 @@ void CreatePolyn(Polynomial *P, int m)
     InitList(P);
     for (int i = 1; i <= m; ++i)
     {
-        printf("请按顺序输入第 %d 项的系数和指数:\t", i);
         ElemType e;
+        printf("请按顺序输入第 %d 项的系数和指数:\t", i);
         scanf("%f, %d", &e.coef, &e.expn);
         // 按指数递增插入
         struct LNode *pre = *P, *s;  // pre 为插入结点所在位置的前驱结点
@@ -119,7 +119,7 @@ void AddPolyn(Polynomial *Pa, Polynomial *Pb)
                 ha = qa;
             }
             // 指数相等时 qa 和 qb 都要 ++
-            qa = ha->next;  // 这里只能用 ha，qa可能已经释放
+            qa = ha->next;  // 这里只能用 ha，qa可能已经释放(系数之和为 0)
             // 释放 Pb 中的结点(随着循环进行，Pb最终只剩头结点)
             struct LNode *temp = qb;
             qb = qb->next;
