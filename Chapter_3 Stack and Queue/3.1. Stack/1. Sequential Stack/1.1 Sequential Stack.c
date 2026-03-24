@@ -1,6 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include "D:\VSCode\Code_Learning\Data Structure\Status.h"
+#include "../../../Status.h"
 
 #define STACK_INIT_SIZE 100
 #define STACKINCREMENT 10
