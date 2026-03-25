@@ -5,7 +5,7 @@
 #define STACK_INIT_SIZE 100
 #define STACKINCREMENT 10
 
-typedef char SElemType;  // 注意这里 SElemType 应为 char 做括号匹配
+typedef int SElemType;
 
 typedef struct
 {
@@ -97,7 +97,7 @@ char Precede(char t1, char t2)
         {'<','<','<','<','<',' ','='}
     };
     char OP[] = "+-*/()#";  // 算符 = 运算符 + 界限符
-    int theta1, theta2;
+    int theta1 = -1, theta2 = -1;  // 必须初始化
     for (int i = 0; i < 7; ++i)
     {
         if (OP[i] == t1)
@@ -157,29 +157,39 @@ int EvaluateExpression()
     char OP[] = "+-*/()#";
     // 
     int a, b, theta, x;
-    while (GetTop(OPND) != '#' && c != '#')
+    while (GetTop(OPTR) != '#' || c != '#')
     {
         if (!In(c, OP))  // 不是操作符是操作数 -- 进栈
         {
-            Push(&OPND, c);
+            Push(&OPND, c - '0');  // c 是字符, '3'(字符三, ASCII = 51) - '0'(ASCII = 48) = 3
             c = getchar();
         }
         else  // 是 算符 = 运算符 + 界限符, 比较 运算符栈栈顶元素 和 用户输入的运算符的优先级 再做相应的操作
         {
-            switch (GetTop(OPTR), c)
+            switch (Precede(GetTop(OPTR), c))
             {
                 case '<':  // 栈顶元素优先权低，将其入栈
-                    Push(&OPTR, c);
+                    Push(&OPTR, c);  
                     c = getchar();
                     break;
                 case '=':  // 优先级相等('('和')'优先级相等)，脱括号(出栈)并接受下一字符
                     Pop(&OPTR, &x);
                     c = getchar();
                     break;
-                case '>':  // 栈顶元素运算符优先级更高，退栈进行运算，并把运算结果保留进 OPND 栈
-                    Pop(&OPTR, theta);
-                    Pop
+                case '>':  // 栈顶元素运算符优先级更高，退栈并计算结果，并把运算结果保留进 OPND 栈
+                    Pop(&OPTR, &theta);  // 取运算符
+                    Pop(&OPND, &b);      // 取操作数 -- 必须 先 b 后 a
+                    Pop(&OPND, &a);
+                    Push(&OPND, Operate(a, theta, b));  // 运算结果 入栈 OPND
             }
         }
     }
+    return GetTop(OPND);
+}
+
+int main() {
+    printf("请输入表达式 (案例: 3*(7-2)#): ");
+    printf("结果: %d\n", EvaluateExpression());
+    system("pause");
+    return 0;
 }
