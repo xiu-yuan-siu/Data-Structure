@@ -80,7 +80,7 @@ Status Pop(SqStack *S, SElemType *e)
     return OK;
 }
 
-bool StackEmpty(SqStack S)
+Status StackEmpty(SqStack S)
 {
     return S.base == S.top;
 }
