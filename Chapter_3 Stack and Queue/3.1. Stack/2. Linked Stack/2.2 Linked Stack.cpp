@@ -32,7 +32,7 @@ public:
         }
         head = nullptr;
     }
-    bool empty()
+    bool empty() const
     {
         return head == nullptr;
     }
