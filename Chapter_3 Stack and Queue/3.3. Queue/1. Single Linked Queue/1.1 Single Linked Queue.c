@@ -12,8 +12,8 @@ typedef struct QNode
 
 typedef struct
 {
-    Queueptr front;  // 队头指针
-    Queueptr rear;   // 队尾指针
+    Queueptr front;  // 队头指针，指向头结点，数据域为空，而非队列元素
+    Queueptr rear;   // 队尾指针，数据域为队列最后一个元素，指针域为NULL
 } LinkQueue;
 
 Status InitQueue(LinkQueue *Q)
