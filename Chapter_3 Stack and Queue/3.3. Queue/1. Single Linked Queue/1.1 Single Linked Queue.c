@@ -81,6 +81,23 @@ Status GetHead(LinkQueue Q, QElemType *e)
     return OK;
 }
 
+Status QueueEmpty(LinkQueue Q)
+{
+    return Q.front == Q.rear ? OK : ERROR;
+}
+
+int QueueLength(LinkQueue Q)
+{
+    int len = 0;
+    Queueptr p = Q.front->next;
+    while (p)
+    {
+        len++;
+        p = p->next;
+    }
+    return len;
+}
+
 void PrintQueueStatus(Status s, const char* msg) {
     if (s == OK) printf("[成功] %s\n", msg);
     else if (s == ERROR) printf("[失败] %s (逻辑错误/队列为空)\n", msg);
