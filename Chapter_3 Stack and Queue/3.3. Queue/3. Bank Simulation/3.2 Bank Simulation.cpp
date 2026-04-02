@@ -249,8 +249,8 @@ private:
         int t = en.OccurTime + intertime;  // 下一顾客到达时间
 
         // 若下一位顾客到达时银行未关门，则插入新的到达事件
-        // && 后面调试人数为 10 的整个业务流程
-        if (t < CloseTime  && CustomerNum < 10)
+        // && 后面调试人数为 5 的整个业务流程
+        if (t < CloseTime  && CustomerNum < 5)
         {
             Event newEvent(t, 0);  // (OccurTime, NType)
             eventList.orderInsert(newEvent);
