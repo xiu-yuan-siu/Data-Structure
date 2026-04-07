@@ -10,7 +10,7 @@ typedef unsigned char SString[MAXSTRLEN + 1];  // 下标为 0 的位置存储串
 // 1.串赋值
 Status StrAssign(SString *T, const char *chars)
 {
-    int len = (int)strlen(chars);
+    int len = strlen(chars);
     if (len > MAXSTRLEN)
     {
         exit(OVERFLOW);
@@ -76,7 +76,7 @@ Status Concat(SString *T, SString S1, SString S2)
     }
     else  // S1 被截断 S1[0] >= MAXSTRLEN
     {
-        for (int i = 1; i <= MAXSTRLEN; i ++)
+        for (int i = 1; i <= MAXSTRLEN; i++)
         {
             (*T)[i] = S1[i];
         }
