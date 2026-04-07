@@ -1,3 +1,3 @@
-#include <iostream>
-#include <stdexcept>
-using namespace std;
+/*
+* 与C版本无太大差别，略
+*/

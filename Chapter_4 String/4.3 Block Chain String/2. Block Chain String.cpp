@@ -1,3 +1,3 @@
-#include <iostream>
-#include <stdexcept>
-using namespace std;
+/*
+* 类似链表(可自由选择单链表，双向链表，循环链表等)，略
+*/
