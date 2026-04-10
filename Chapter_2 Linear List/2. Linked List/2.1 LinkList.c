@@ -1,33 +1,5 @@
-#include <stdio.h>
-#include <stdlib.h>
+#include "2.1 LinkList.h"
 #include <assert.h>  // 调试
-#include "../../Status.h"
-
-typedef int ElemType;  // 这里可以自定义 ElemType
-
-// 定义带头结点的 节点结构体
-typedef struct LNode
-{
-    ElemType data;
-    struct LNode * next;  // C 要写 struct, C++ 可以省略
-}LNode, * LinkList;  // 这里节点用LNode定义, 链表用Linklist
-
-// const LinkList L -- const 修饰的是指针(不能防止修改所指值), 为了防止修改传入的链表时, 这里重新定义一个名(满足用头指针LinkList命名链表)
-typedef const LNode* constLinkList;
-
-Status InitList(LinkList *L);  // 传 指向指针的指针
-Status DestroyList(LinkList *L);
-Status ClearList(LinkList L);
-Status ListEmpty(constLinkList L);
-Status GetElem(constLinkList L, int i, ElemType *e);  // ElemType 传参时取地址
-int LocateElem(constLinkList L, ElemType *e);
-Status PriorElem(constLinkList L, const ElemType *cur_e, ElemType *pre_e);
-Status NextElem(constLinkList L, const ElemType *cur_e, ElemType *next_e);
-Status ListInsert(LinkList L, int i, const ElemType *e);
-Status ListDelete(LinkList L, int i, ElemType *e);
-void HeadCreateList(LinkList *L, int n);  // 头插法
-void TailCreateList(LinkList *L, int n);  // 尾插法
-void ListMerge(LinkList *La, LinkList *Lb, LinkList *Lc);
 
 Status InitList(LinkList *L)
 {
@@ -290,118 +262,120 @@ void PrintList(constLinkList L) {
     printf("NULL\n");
 }
 
-int main() {
-    LinkList L;
-    ElemType e, pre, next;
-    Status s;
+// 这里如果解除注释那么第四章 Word Index Table的 .c 文件就运行不了， 记得运行后重新注释
 
-    // 1. 测试 InitList
-    printf("--- Test InitList ---\n");
-    s = InitList(&L);
-    assert(s == OK && L->next == NULL && L->data == 0);
-    printf("InitList OK.\n");
+// int main() {
+//     LinkList L;
+//     ElemType e, pre, next;
+//     Status s;
 
-    // 2. 测试 ListEmpty
-    printf("\n--- Test ListEmpty ---\n");
-    assert(ListEmpty(L) == TRUE);
-    printf("List is empty (Correct).\n");
+//     // 1. 测试 InitList
+//     printf("--- Test InitList ---\n");
+//     s = InitList(&L);
+//     assert(s == OK && L->next == NULL && L->data == 0);
+//     printf("InitList OK.\n");
 
-    // 3. 测试 ListInsert (边界逻辑：头、中、尾、越界)
-    printf("\n--- Test ListInsert ---\n");
-    e = 10; ListInsert(L, 1, &e); // 插在第1个 [10]
-    e = 30; ListInsert(L, 2, &e); // 插在第2个 [10, 30]
-    e = 20; ListInsert(L, 2, &e); // 插在中间  [10, 20, 30]
-    PrintList(L);
-    assert(L->data == 3);
+//     // 2. 测试 ListEmpty
+//     printf("\n--- Test ListEmpty ---\n");
+//     assert(ListEmpty(L) == TRUE);
+//     printf("List is empty (Correct).\n");
+
+//     // 3. 测试 ListInsert (边界逻辑：头、中、尾、越界)
+//     printf("\n--- Test ListInsert ---\n");
+//     e = 10; ListInsert(L, 1, &e); // 插在第1个 [10]
+//     e = 30; ListInsert(L, 2, &e); // 插在第2个 [10, 30]
+//     e = 20; ListInsert(L, 2, &e); // 插在中间  [10, 20, 30]
+//     PrintList(L);
+//     assert(L->data == 3);
     
-    s = ListInsert(L, 5, &e);     // 越界测试
-    assert(s == ERROR);
-    printf("Out of bounds insert blocked (Correct).\n");
+//     s = ListInsert(L, 5, &e);     // 越界测试
+//     assert(s == ERROR);
+//     printf("Out of bounds insert blocked (Correct).\n");
 
-    // 4. 测试 GetElem & LocateElem
-    printf("\n--- Test Get & Locate ---\n");
-    GetElem(L, 2, &e);
-    assert(e == 20);
-    printf("Get position 2: %d\n", e);
+//     // 4. 测试 GetElem & LocateElem
+//     printf("\n--- Test Get & Locate ---\n");
+//     GetElem(L, 2, &e);
+//     assert(e == 20);
+//     printf("Get position 2: %d\n", e);
     
-    e = 30;
-    assert(LocateElem(L, &e) == 3);
-    e = 99;
-    assert(LocateElem(L, &e) == 0);
-    printf("Locate existing and non-existing OK.\n");
+//     e = 30;
+//     assert(LocateElem(L, &e) == 3);
+//     e = 99;
+//     assert(LocateElem(L, &e) == 0);
+//     printf("Locate existing and non-existing OK.\n");
 
-    // 5. 测试 PriorElem & NextElem
-    printf("\n--- Test Prior & Next ---\n");
-    e = 20;
-    PriorElem(L, &e, &pre);
-    NextElem(L, &e, &next);
-    assert(pre == 10 && next == 30);
-    printf("20's Prior: %d, Next: %d\n", pre, next);
+//     // 5. 测试 PriorElem & NextElem
+//     printf("\n--- Test Prior & Next ---\n");
+//     e = 20;
+//     PriorElem(L, &e, &pre);
+//     NextElem(L, &e, &next);
+//     assert(pre == 10 && next == 30);
+//     printf("20's Prior: %d, Next: %d\n", pre, next);
 
-    e = 10;
-    assert(PriorElem(L, &e, &pre) == ERROR); // 第一个没前驱
-    printf("First element has no prior (Correct).\n");
+//     e = 10;
+//     assert(PriorElem(L, &e, &pre) == ERROR); // 第一个没前驱
+//     printf("First element has no prior (Correct).\n");
 
-    // 6. 测试 ListDelete
-    printf("\n--- Test ListDelete ---\n");
-    ListDelete(L, 2, &e); // 删除 20
-    assert(e == 20 && L->data == 2);
-    PrintList(L);
+//     // 6. 测试 ListDelete
+//     printf("\n--- Test ListDelete ---\n");
+//     ListDelete(L, 2, &e); // 删除 20
+//     assert(e == 20 && L->data == 2);
+//     PrintList(L);
 
-    // 7. 测试 ClearList
-    printf("\n--- Test ClearList ---\n");
-    ClearList(L);
-    assert(ListEmpty(L) == TRUE && L->next == NULL);
-    printf("ClearList OK.\n");
-    DestroyList(&L);
+//     // 7. 测试 ClearList
+//     printf("\n--- Test ClearList ---\n");
+//     ClearList(L);
+//     assert(ListEmpty(L) == TRUE && L->next == NULL);
+//     printf("ClearList OK.\n");
+//     DestroyList(&L);
 
-    // 8. 测试 HeadCreateList (逆序输入) 和 TailCreateList
-    printf("\n--- Test Head/Tail Create ---\n");
-    printf("Testing HeadCreateList (please input 2 integers, e.g., 1 2): ");
-    HeadCreateList(&L, 2); 
-    PrintList(L); // 输入1 2，应显示 2 -> 1
-    DestroyList(&L);
+//     // 8. 测试 HeadCreateList (逆序输入) 和 TailCreateList
+//     printf("\n--- Test Head/Tail Create ---\n");
+//     printf("Testing HeadCreateList (please input 2 integers, e.g., 1 2): ");
+//     HeadCreateList(&L, 2); 
+//     PrintList(L); // 输入1 2，应显示 2 -> 1
+//     DestroyList(&L);
 
-    printf("Testing TailCreateList (please input 2 integers, e.g., 1 2): ");
-    TailCreateList(&L, 2); 
-    PrintList(L); // 输入1 2，应显示 1 -> 2
+//     printf("Testing TailCreateList (please input 2 integers, e.g., 1 2): ");
+//     TailCreateList(&L, 2); 
+//     PrintList(L); // 输入1 2，应显示 1 -> 2
 
-    // 9. 测试 ListMerge (确保 La, Lb 有序)
-    printf("\n--- Test ListMerge (Sorted) ---\n");
-    LinkList Lb, Lc;
-    InitList(&L);  // 重新初始化 La
-    InitList(&Lb); // 初始化 Lb
+//     // 9. 测试 ListMerge (确保 La, Lb 有序)
+//     printf("\n--- Test ListMerge (Sorted) ---\n");
+//     LinkList Lb, Lc;
+//     InitList(&L);  // 重新初始化 La
+//     InitList(&Lb); // 初始化 Lb
     
-    // 构造有序 La: [1, 5, 10]
-    e = 1; ListInsert(L, 1, &e);
-    e = 5; ListInsert(L, 2, &e);
-    e = 10; ListInsert(L, 3, &e);
+//     // 构造有序 La: [1, 5, 10]
+//     e = 1; ListInsert(L, 1, &e);
+//     e = 5; ListInsert(L, 2, &e);
+//     e = 10; ListInsert(L, 3, &e);
     
-    // 构造有序 Lb: [2, 6]
-    e = 2; ListInsert(Lb, 1, &e);
-    e = 6; ListInsert(Lb, 2, &e);
-    e = 10; ListInsert(Lb, 3, &e);
-    e = 12; ListInsert(Lb, 4, &e);
+//     // 构造有序 Lb: [2, 6]
+//     e = 2; ListInsert(Lb, 1, &e);
+//     e = 6; ListInsert(Lb, 2, &e);
+//     e = 10; ListInsert(Lb, 3, &e);
+//     e = 12; ListInsert(Lb, 4, &e);
     
-    printf("La: "); PrintList(L);
-    printf("Lb: "); PrintList(Lb);
+//     printf("La: "); PrintList(L);
+//     printf("Lb: "); PrintList(Lb);
     
-    ListMerge(&L, &Lb, &Lc);
-    printf("Merged Lc: "); PrintList(Lc);
+//     ListMerge(&L, &Lb, &Lc);
+//     printf("Merged Lc: "); PrintList(Lc);
     
-    // 正确的断言：3 + 4 = 7
-    assert(Lc->data == 7); 
-    // 检查归并后的第一个和最后一个元素是否正确
-    GetElem(Lc, 1, &e); assert(e == 1);
-    GetElem(Lc, 7, &e); assert(e == 12);
+//     // 正确的断言：3 + 4 = 7
+//     assert(Lc->data == 7); 
+//     // 检查归并后的第一个和最后一个元素是否正确
+//     GetElem(Lc, 1, &e); assert(e == 1);
+//     GetElem(Lc, 7, &e); assert(e == 12);
     
-    assert(Lb == NULL); 
-    printf("Merge logic and length update OK.\n");
+//     assert(Lb == NULL); 
+//     printf("Merge logic and length update OK.\n");
 
-    // 10. 销毁
-    DestroyList(&Lc);
-    printf("\n--- All Tests Passed! ---\n");
+//     // 10. 销毁
+//     DestroyList(&Lc);
+//     printf("\n--- All Tests Passed! ---\n");
     
-    system("pause");
-    return 0;
-}
+//     system("pause");
+//     return 0;
+// }
