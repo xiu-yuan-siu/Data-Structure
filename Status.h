@@ -18,6 +18,7 @@
 #define ERROR       0   // 错误/失败
 #define INFEASIBLE  -1  // 不可行的
 #define OVERFLOW    -2  // 堆栈上溢
+#define UNDERFLOW   -3  // 下溢(数组顺序存储用到)
 
 /* 状态码类型 */
 typedef int Status;
