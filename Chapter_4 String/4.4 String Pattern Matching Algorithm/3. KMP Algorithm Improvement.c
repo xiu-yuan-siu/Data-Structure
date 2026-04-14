@@ -16,32 +16,83 @@ void get_next(SString T, int next[])
     int i = 1;
     next[1] = 0;
     int j = 0;
-    while (i < T[0]) {
-        if (j == 0 || T[i] == T[j]) {
+    while (i < T[0])
+    {
+        if (j == 0 || T[i] == T[j]) 
+        {
             ++i;
             ++j;
             next[i] = j;
-        } else {
+        } 
+        else 
+        {
             j = next[j];
         }
     }
 }
+
+/*
+主串 S = {"aaabaaaab"}
+模式串 T = {"aaaab"}
+nextval = [0, 0, 0, 0, 4]
+
+我们使用 KMP 匹配过程（i 指向 S，j 指向 T，初始 i=1, j=1）：
+
+#### 第一轮匹配：
+*   S[1..4] 是 "aaab"，T[1..4] 是 "aaaa"。
+*   i=1, j=1: 'a'=='a' -> i=2, j=2
+*   i=2, j=2: 'a'=='a' -> i=3, j=3
+*   i=3, j=3: 'a'=='a' -> i=4, j=4
+*   i=4, j=4: S[4]='b', T[4]='a' -> 失配！
+
+此时关键操作：
+j 回溯。根据 nextval[4]，新的 j = {nextval}[4] = 0。
+*(注意：如果是普通 next，j 会变成 3，然后比较 S[4] 和 T[3]('a')，依然失配，再变 2，再变 1，效率低。nextval 直接让 j 变为 0)*
+
+当 j=0 时，KMP 算法规定：i 进位，j 复位为 1。
+*   i 变为 5，j 变为 1。
+
+#### 第二轮匹配：
+当前 i=5 (S[5]='a'), j=1 (T[1]='a')。
+*   i=5, j=1: 'a'=='a' -> i=6, j=2
+*   i=6, j=2: S[6]='a', T[2]='a' -> 'a'=='a' -> i=7, j=3
+*   i=7, j=3: S[7]='a', T[3]='a' -> 'a'=='a' -> i=8, j=4
+*   i=8, j=4: S[8]='a', T[4]='a' -> 'a'=='a' -> i=9, j=5
+*   i=9, j=5: S[9]='b', T[5]='b' -> 'b'=='b' -> 匹配成功！
+
+此时 j > T.length，匹配结束。
+匹配位置：i - T.length = 9 - 5 = 4? 不对，是起始索引。
+起始索引 = i - m = 9 - 5 = 4 (如果下标从1开始，则是第5个位置开始？让我们复查一下 S 的下标)。
+
+S:
+1:a, 2:a, 3:a, 4:b, 5:a, 6:a, 7:a, 8:a, 9:b
+
+匹配发生在 S[5 \dots 9] 即 "aaaab"。
+起始下标是 5。
+算法返回通常是 i - m (若 i 停在 m+1 处) 或者记录起始位置。在严蔚敏书中，通常返回的是主串中匹配开始的序号。
+在此例中，当 j=5 匹配成功后，i 会加 1 变为 10，j 加 1 变为 6。循环结束。
+返回位置：i - T.length = 10 - 5 = 5。正确。
+*/
 
 void get_nextval(SString T, int nextval[])
 {
     int i = 1;
     nextval[1] = 0;
     int j = 0;
-    while (i < T[0]) {
-        if (j == 0 || T[i] == T[j]) {
+    while (i < T[0]) 
+    {
+        if (j == 0 || T[i] == T[j]) 
+        {
             ++i;
             ++j;
-            if (T[i] != T[j])
-                nextval[i] = j;
+            if (T[i] != T[j])  // i, j 都自增后的新位置字符比较
+                nextval[i] = j;  // // 如果新位置的字符 T[i] 和回溯位置字符 T[j] 不同 -> 存 j (标准 next[i] = j)
             else
-                nextval[i] = nextval[j];  // 优化：跳过重复
-        } else {
-            j = nextval[j];
+                nextval[i] = nextval[j];  // 如果相同 -> 存 nextval[j] (因为 T[i]==T[j]，回溯到 j 肯定也失配，不如直接跳到 j 该去的地方)
+        } 
+        else 
+        {
+            j = nextval[j];  // // 动作 C: 失配时，j 回溯
         }
     }
 }
