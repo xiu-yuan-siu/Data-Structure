@@ -394,41 +394,9 @@ int main()
 {
     test_CreateSMatrix();
     test_AddSubSMatrix();
-    test_MultiSMatrix();   // 重点验证修复后的乘法
+    test_MultiSMatrix();
     test_Transpose();
     test_CopyDestroy();
     system("pause");
     return 0;
 }
-
-/*
-=== AddSMatrix 测试输入 ===
-# 矩阵 A (2×2, 2个非零元)
-2 2 2
-1 1 1
-2 2 2
-# 矩阵 B (2×2, 2个非零元)
-2 2 2
-1 2 3
-2 1 4
-
-=== MultiSMatrix 测试输入 ===
-# 矩阵 A (2×3)
-2 3 3
-1 1 1
-1 3 2
-2 2 3
-# 矩阵 B (3×2)
-3 2 3
-1 2 1
-2 1 4
-3 2 2
-
-=== Transpose 测试输入 ===
-# 矩阵 M (3×4)
-3 4 4
-1 2 3
-2 1 5
-2 3 1
-3 4 2
-*/
