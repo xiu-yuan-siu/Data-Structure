@@ -215,6 +215,7 @@ int main() {
     
     DestroyArray(&A);
     printf("\n[ALL TESTS PASSED]\n");
+    
     system("pause");
     return 0;
 }
