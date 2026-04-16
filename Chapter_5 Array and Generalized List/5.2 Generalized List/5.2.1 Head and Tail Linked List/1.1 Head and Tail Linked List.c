@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include "../../../Status.h"
+#include "../../../Status.h"  // 实际上没用到，可自行修改，见扩展线性链表的实现
 
 typedef char AtomType;
 
