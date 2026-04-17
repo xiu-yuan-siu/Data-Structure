@@ -28,7 +28,7 @@ Status InitGList(GList *L)
         exit(OVERFLOW);
     (*L)->tag = LIST;
     (*L)->a.hp = NULL;
-    (*L)->tp = NULL;
+    (*L)->tp = NULL;        // 扩展线性链表 tp 域永远为 NULL; hp 域才用于指示子表中的第一个元素
     return OK;
 }
 
@@ -162,18 +162,16 @@ int GListLength(GList L)  // 参数是头结点，一定是LIST
 // 6.深度 -- 原子(depth=0)、空表(depth=1)、非空表(depth=max(所有元素depth)+1)(+1为原子那一层)
 int GListDepth(GList L)
 {
+    // 基本型
     if (!L)  return 0; // 未初始化或已销毁长度为 0;
     if (L->a.hp == NULL) return 1;  // 空表长度为 1
     if (L->tag == ATOM) return 0;   // 创建单个原子(不是表)，深度为 0
+    // 归纳项
     int max = 0;
     for (GLNode *p = L->a.hp; p != NULL; p = p->tp)  // 同层遍历
     {
-        int dep;
-        if (p->tag == ATOM)  // 原子 depth = 0
-            dep = 0;
-        else
-            dep = GListDepth(p);  // 递归求该节点深度
-        if (max < dep)
+        int dep = GListDepth(p);  // 递归求该节点深度
+        if (dep > max)
             max = dep;
     }
     return max + 1;

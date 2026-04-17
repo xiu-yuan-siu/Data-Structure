@@ -28,7 +28,8 @@ typedef struct GLNode
 // 1.初始化
 void InitGList(GList *L)
 {
-    *L = NULL;
+    // 头结点的 tp 域就指向表节点(若存在)，不存在才为 NULL; 不永远为 NULL(与扩展线性链表的区别)
+    *L = NULL;  // 空表
 }
 
 // 辅助函数：分离表头和表尾字符串，a,(b,c), (a, b), (b, c)
@@ -178,28 +179,23 @@ int GListDepth(GList L)
         return 1;  // 空表深度为 1
     if (L->tag == ATOM)
         return 0;  // 原子深度为 0
-    int max = 0, dep;
+    int max = 0;
     // 找最深的那一棵树(最深的表)，每一个分支都找，直到找完所有表
-    for (GList p = L; p != NULL; p = p->a.ptr.tp)
+    for (GList pp = L; pp != NULL; pp = pp->a.ptr.tp)
     {
-        dep = GListDepth(p->a.ptr.hp);  // 递归求子表深度
+        int dep = GListDepth(pp->a.ptr.hp);  // 递归求子表深度
         if (dep > max)
             max = dep;
     }
-    return max + 1;
+    return max + 1;     // 非空表的深度是个元素的深度的最大值加 1
 }
 
 // 7.取表头 -- 注意：需要深拷贝复制表头，因为原表头可能与其他部分共享
 GList GetHead(GList L)
 {
-    if (!L || L->tag != LIST)  // 传入(的表)为空 或 不是表(结点)
+    if (!L || L->tag == ATOM)  // 空表或结点
     {
         printf("传入的不是表结点!\n");  // L是原子或NULL
-        exit(0);
-    }
-    if (!L->a.ptr.hp)  //传入的表是表节点，但是为空表
-    {
-        printf("空表无表头!\n");
         exit(0);
     }
     GList h;
@@ -210,18 +206,12 @@ GList GetHead(GList L)
 // 8.取表尾 -- 表尾一定是一个子表(tag = LIST)
 GList GetTail(GList L)
 {
-    if (!L || L->tag != LIST)  // 传入(的表)为空 或 不是表(结点)
+    if (!L || L->tag == ATOM)  // 空表 或 不是表(结点)
     {
         printf("传入的不是表结点!\n");  // L是原子或NULL
         exit(0);
     }
-    if (!L->a.ptr.hp)  //传入的表是表节点，但是为空表
-    {
-        printf("空表无表头!\n");
-        exit(0);
-    }
     GList t = (GLNode*)malloc(sizeof(GLNode));
-    t->tag = LIST;
     CopyGList(&t, L->a.ptr.tp);  // 复制原表尾给t
     return t;
 }
