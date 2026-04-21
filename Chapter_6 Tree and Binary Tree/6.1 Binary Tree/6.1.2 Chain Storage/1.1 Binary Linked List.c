@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include "../../../Chapter_3 Stack and Queue/3.1. Stack/1. Sequential Stack/1.1 Sequential Stack.h"
 #include "../../../Status.h"
 
 typedef char TElemType;                 // 数据元素类型，根据需求修改
@@ -42,12 +43,12 @@ BiTree CreateNode(TElemType e)
     return p;
 }
 
-// '#' 表示空结点，definition是数组，如"ABD##E##CF###"，传入 index 参数在内部管理，不是对外接口，是为了便于递归构造二叉树的
+// ' '(空格) 表示空结点，definition是数组，如"ABD##E##CF###"，传入 index 参数在内部管理，不是对外接口，是为了便于递归构造二叉树的
 Status CreateBiTreeInternal(BiTree *T, const TElemType definition[], int *index)
 {
     TElemType ch = definition[*index];
     ++(*index);     // 按先序创建下一个结点
-    if (ch == '#') 
+    if (ch == ' ') 
     {
         *T = NULL;
     } 
@@ -63,11 +64,28 @@ Status CreateBiTreeInternal(BiTree *T, const TElemType definition[], int *index)
     return OK;
 }
 
-// // 3.按先序序列(最常用)构造二叉树 -- 与书中的格式相同，无对外接口 index
-Status CreateBiTree(BiTree *T, const TElemType definition[])
+// 3.1 传入数组按先序序列(最常用)构造二叉树 -- 与书中的ADT定义相同，无对外接口 index
+Status CreateBiTreeArray(BiTree *T, const TElemType definition[])
 {
     int index = 0;
     return CreateBiTreeInternal(T, definition, &index);
+}
+
+// 3.2 先序次序依次输入二叉树中结点的值(一个字符)(空格字符表示空子树)
+Status CreateBiTree(BiTree *T)
+{
+    char ch;
+    printf("请按照先序次序输入二叉树中结点的值(一个字符)(空格字符表示空子树): \n");
+    scanf("%c", &ch);
+    if (ch == ' ') *T = NULL;
+    else 
+    {
+        if (!(*T = (BiTree)malloc(sizeof(BiTNode)))) exit(OVERFLOW);
+        (*T)->data = ch;                // 生成根节点
+        CreateBiTree(&((*T)->lchild));     // 递归构造左子树
+        CreateBiTree(&((*T)->rchild));     // 递归构造右子树
+    }
+    return OK;
 }
 
 // 4.清空
@@ -113,7 +131,7 @@ int BiTreeDepth(BiTree T)
 TElemType Root(BiTree T)
 {
     if (T == NULL)
-        return '#';     // '#' 表示空结点
+        return ' ';     // ' ' 表示空结点
     return T->data;
 }
 
@@ -144,7 +162,7 @@ Status ValueOverload(BiTree T, BiTree e, TElemType *result)
 // 8.返回结点 e 的值
 TElemType Value(BiTree T, BiTree e)
 {
-    if (T == NULL) return '#';
+    if (T == NULL) return ' ';
     return e->data;
 } 
 
@@ -265,6 +283,8 @@ Status Visit(TElemType e)
 
 /*
 * 先序、中序、后序遍历均适用递归工作栈(压入弹出工作记录)实现，层序遍历通过队列实现
+* 下面的先序、中序、后序实际上本质都经历：根 -> 左子树 -> 返回根 -> 右子树 -> 返回根
+* 不同之处在于 先序在第一个根处访问、中序在第二个根处访问、后序在第三个根处访问
 */
 
 // 17.先序遍历
@@ -296,6 +316,55 @@ Status InOrderTraverse(BiTree T, Status(*Visit)(TElemType))
     else 
         return OK;
 }
+
+// 这里实现 中序遍历的两个非递归算法
+// 18.1 非递归算法(基础版) -- 完全还原递归的每一个动作（包括把空指针也压进去），类似“翻译”机器码
+// 此时 SElemType = BiTree 不便于测试
+// Status InOrderTraverse_6_2(BiTree T, Status(*Visit)(TElemType))
+// {
+//     SqStack S;
+//     InitStack(&S);
+//     Push(&S, T);                        // 根指针进栈
+//     while (!StackEmpty(S))
+//     {
+//         BiTree p;
+//         while (GetTop(S, &p) && p)      // 栈顶指针为空退出循环
+//             Push(&S, p->lchild);        // 向左走到尽头
+//         Pop(&S, &p);                    // 空结点退栈
+//         if (!StackEmpty(S))             // 访问结点，向右一步
+//         {
+//             Pop(&S, &p);
+//             if (!Visit(p->data))
+//                 return ERROR;
+//             Push(&S, p->rchild);
+//         }
+//     }
+//     return OK;
+// }
+
+// // 18.2 非递归算法(优化版, 更常用) -- 只要栈不空，就说明还有“未完成的任务”；只要指针 p 不为空，就说明还有“未探索的领地”
+// Status InOrderTraverse_6_3(BiTree T, Status(*Visit)(TElemType))
+// {
+//     SqStack S;
+//     InitStack(&S);
+//     BiTree p = T;
+//     while (p || !StackEmpty(S)) // 遍历结点指针 p 和栈 S 同时为空时退出循环
+//     {
+//         if (p)                  // 根指针进栈，遍历左子树
+//         {
+//             Push(&S, p);
+//             p = p->lchild;
+//         }
+//         else                    // 根指针出栈，访问根节点，遍历右子树
+//         {
+//             Pop(&S, &p);
+//             if (!Visit(p->data))
+//                 return ERROR;
+//             p = p->rchild;
+//         }
+//     }
+//     return OK;
+// }
 
 // 19.后序遍历
 Status PostOrderTraverse(BiTree T, Status(*Visit)(TElemType))
@@ -363,9 +432,9 @@ int main() {
     //      B   C
     //     / \  /
     //    D   E F
-    const char* definition = "ABD##E##CF###";
+    const char* definition = "ABD  E  CF   ";
     printf("1. 开始按先序字符串 [%s] 构造二叉树...\n", definition);
-    CreateBiTree(&T, definition);
+    CreateBiTreeArray(&T, definition);
     
     printf("\n2. 测试基本属性：\n");
     printf("树是否为空? %s\n", BiTreeEmpty(T) ? "是" : "否");

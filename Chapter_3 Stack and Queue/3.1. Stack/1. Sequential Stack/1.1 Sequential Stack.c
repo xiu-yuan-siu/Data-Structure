@@ -1,18 +1,4 @@
-#include <stdio.h>
-#include <stdlib.h>
-#include "../../../Status.h"
-
-#define STACK_INIT_SIZE 100
-#define STACKINCREMENT 10
-
-typedef int SElemType;
-
-typedef struct
-{
-    SElemType *base;  // 栈底指针，构造之前和销毁之后值为 NULL
-    SElemType *top;  // 栈顶指针，指向栈顶元素的下一位置
-    int stacksize;  // 当前已分配的存储空间，以元素为单位
-}SqStack;
+#include "1.1 Sequential Stack.h"
 
 Status InitStack(SqStack *S)
 {
@@ -42,6 +28,14 @@ Status ClearStack(SqStack *S)
 {
     S->top = S->base;  // 清空操作是让 top 回到 base 的位置，不能交换，栈空
     return OK;
+}
+
+Status StackEmpty(SqStack S)
+{
+    if (S.top == S.base)
+        return TRUE;
+    else
+        return FALSE;
 }
 
 Status GetTop(SqStack S, SElemType *e)
