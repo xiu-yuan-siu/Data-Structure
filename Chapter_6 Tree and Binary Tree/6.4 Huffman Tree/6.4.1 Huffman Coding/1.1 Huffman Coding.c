@@ -122,6 +122,7 @@ void HuffmanCoding_NoRecursive(HuffmanTree HT, HuffmanCode *HC, int n) {
                 (*HC)[p] = (char*)malloc((cdlen + 1) * sizeof(char));
                 cd[cdlen] = '\0';               // 编码结束符
                 strcpy((*HC)[p], cd);           // (*HC)[p] 为数组名，数组名即指针
+                // 叶子结点后不立即cdlen--，留到父结点回溯时统一处理
             }
         } else if (HT[p].weight == 1) {         // 向右
             HT[p].weight = 2;
@@ -129,10 +130,12 @@ void HuffmanCoding_NoRecursive(HuffmanTree HT, HuffmanCode *HC, int n) {
                 p = HT[p].rchild;
                 cd[cdlen++] = '1';
             }
+            // 如果无右孩子（比如只有左子树的结构），直接跳到else分支回溯
         } else {                            // HT[p].weight == 2, 则退回到父节点，编码长度减 1
             HT[p].weight = 0;
             p = HT[p].parent;
             --cdlen;
+            // 例如从"101"退回到"10"，准备探索父结点的另一分支
         }
     }
     free(cd);
