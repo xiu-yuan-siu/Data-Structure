@@ -67,22 +67,22 @@ void Output(List L) {
 // 全局变量，记录解的个数
 int powerSetCount = 0;
 
-void GetPowerSet(int i, List A, List *B) {      // i: 当前考察A中第i个元素（1-based，对应A.elem[i-1];A: 原集合;B: 当前已构造的子集（解向量）
+void GetPowerSet(int i, List A, List *B) {      // i: 当前考察A中第i个元素（1-based，对应A.data[i-1];A: 原集合;B: 当前已构造的子集（解向量）
     ElemType x;
     int k;                              // 局部变量 k 为进入函数时表 B 的当前长度
-    if (i > ListLength(A)) {            // 叶子结点，输出当前 B 值，即当前幂集的第一个元素
+    if (i > ListLength(A)) {            // 叶子结点，输出当前 B 值，即幂集的一个元素
         Output(*B);
         ++powerSetCount;
         return;
     } else {
         GetElem(A, i, &x);              // 获取 A 的第 i 个元素
         k = ListLength(*B);
-        // x进入当前子集B
-        ListInsert(B, k + 1, x);
-        GetPowerSet(i + 1, A, B);
-        // 回溯：撤销选择，x不进入当前子集B
-        ListDelete(B, k + 1, &x);
-        GetPowerSet(i + 1, A, B);
+        // 选 x: 先插入，递归，再回溯删除
+        ListInsert(B, k + 1, x);        // x 插入 B 最后面
+        GetPowerSet(i + 1, A, B);       // 取 x，这里会完成输出
+        ListDelete(B, k + 1, &x);       // 实践这里 x 最好改为 temp(无用值，仅作为参数调用函数)
+        // 不选 x: 直接递归，什么都不做(前面没有插入，自然就没有选, i = 4)
+        GetPowerSet(i + 1, A, B);       // 舍 x
     }
 }
 
