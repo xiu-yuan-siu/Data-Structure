@@ -109,3 +109,94 @@ int main() {
     system("pause");
     return 0;
 }
+
+/* ==================== 运行过程 ====================
+GetPowerSet(i=1, A, B=∅)          ← 根节点，考察 A 的第 1 个元素（x=1）
+    │
+    ├── 【选 1】ListInsert(B, 1, 1) → B={1}
+    │   │
+    │   └── ① GetPowerSet(i=2, A, B={1})      ← 第一个GetPowerSet，考察第2个元素（x=2）
+    │       │
+    │       ├── 【选 2】ListInsert(B, 2, 2) → B={1,2}
+    │       │   │
+    │       │   └── ① GetPowerSet(i=3, A, B={1,2})      ← 第一个GetPowerSet，考察第3个元素（x=3）
+    │       │       │
+    │       │       ├── 【选 3】ListInsert(B, 3, 3) → B={1,2,3}
+    │       │       │   │
+    │       │       │   └── ① GetPowerSet(i=4, A, B={1,2,3})
+    │       │       │       i=4 > ListLength(A)=3，叶子结点
+    │       │       │       输出 {1, 2, 3}  ✓
+    │       │       │       返回
+    │       │       │   ListDelete(B, 3, &temp) → B={1,2}   ← 回溯撤销选3
+    │       │       │
+    │       │       └── 【不选 3】B 保持 {1,2}
+    │       │           │
+    │       │           └── ② GetPowerSet(i=4, A, B={1,2})      ← 第二个GetPowerSet（Delete后的）
+    │       │               i=4 > 3，叶子结点
+    │       │               输出 {1, 2}  ✓
+    │       │               返回
+    │       │   ListDelete(B, 2, &temp) → B={1}   ← 回溯撤销选2
+    │       │
+    │       └── 【不选 2】B 保持 {1}
+    │           │
+    │           └── ② GetPowerSet(i=3, A, B={1})      ← 第二个GetPowerSet（Delete后的），考察第3个元素（x=3）
+    │               │
+    │               ├── 【选 3】ListInsert(B, 2, 3) → B={1,3}
+    │               │   │
+    │               │   └── ① GetPowerSet(i=4, A, B={1,3})
+    │               │       i=4 > 3，叶子结点
+    │               │       输出 {1, 3}  ✓
+    │               │       返回
+    │               │   ListDelete(B, 2, &temp) → B={1}   ← 回溯撤销选3
+    │               │
+    │               └── 【不选 3】B 保持 {1}
+    │                   │
+    │                   └── ② GetPowerSet(i=4, A, B={1})      ← 第二个GetPowerSet（Delete后的）
+    │                       i=4 > 3，叶子结点
+    │                       输出 {1}  ✓
+    │                       返回
+    │   ListDelete(B, 1, &temp) → B=∅   ← 回溯撤销选1
+    │
+    └── 【不选 1】B 保持 ∅
+        │
+        └── ② GetPowerSet(i=2, A, B=∅)      ← 第二个GetPowerSet（Delete后的），考察第2个元素（x=2）
+            │
+            ├── 【选 2】ListInsert(B, 1, 2) → B={2}
+            │   │
+            │   └── ① GetPowerSet(i=3, A, B={2})      ← 第一个GetPowerSet，考察第3个元素（x=3）
+            │       │
+            │       ├── 【选 3】ListInsert(B, 2, 3) → B={2,3}
+            │       │   │
+            │       │   └── ① GetPowerSet(i=4, A, B={2,3})
+            │       │       i=4 > 3，叶子结点
+            │       │       输出 {2, 3}  ✓
+            │       │       返回
+            │       │   ListDelete(B, 2, &temp) → B={2}   ← 回溯撤销选3
+            │       │
+            │       └── 【不选 3】B 保持 {2}
+            │           │
+            │           └── ② GetPowerSet(i=4, A, B={2})      ← 第二个GetPowerSet（Delete后的）
+            │               i=4 > 3，叶子结点
+            │               输出 {2}  ✓
+            │               返回
+            │   ListDelete(B, 1, &temp) → B=∅   ← 回溯撤销选2
+            │
+            └── 【不选 2】B 保持 ∅
+                │
+                └── ② GetPowerSet(i=3, A, B=∅)      ← 第二个GetPowerSet（Delete后的），考察第3个元素（x=3）
+                    │
+                    ├── 【选 3】ListInsert(B, 1, 3) → B={3}
+                    │   │
+                    │   └── ① GetPowerSet(i=4, A, B={3})
+                    │       i=4 > 3，叶子结点
+                    │       输出 {3}  ✓
+                    │       返回
+                    │   ListDelete(B, 1, &temp) → B=∅   ← 回溯撤销选3
+                    │
+                    └── 【不选 3】B 保持 ∅
+                        │
+                        └── ② GetPowerSet(i=4, A, B=∅)      ← 第二个GetPowerSet（Delete后的）
+                            i=4 > 3，叶子结点
+                            输出 {}  ✓   ← 空集
+                            返回
+*/
