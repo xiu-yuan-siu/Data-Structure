@@ -12,7 +12,7 @@ typedef struct
     ElemType *elem;  // 存储基址 或 ElemType elem[LIST_INIT_SIZE];
     int length;      // 当前长度
     int list_size;   // 当前分配的存储容量
-}SqList;
+} SqList;
 
 Status InitList(SqList *L)
 {
