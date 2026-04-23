@@ -141,11 +141,29 @@ void HuffmanCoding_NoRecursive(HuffmanTree HT, HuffmanCode *HC, int n) {
     free(cd);
 }
 
+void HuffmanDecoding(HuffmanTree HT, int n, char *code, char *chars) {
+    // 根据待编译的二进制字符串code走，每走到一个叶子结点即编译了一个字符通过chars取出，再重新回到根结点，沿着code继续走编译下一个字符
+    int p = 2 * n - 1;
+    printf("编译结果: ");
+    for (int i = 0; code[i] != '\0'; ++i) {
+        if (code[i] == '0') {
+            p = HT[p].lchild;
+        } else {                // code[i] == '1'
+            p = HT[p].rchild;
+        }
+        if (HT[p].lchild == 0 && HT[p].rchild == 0) {       // 到达叶子结点
+            printf("%c", chars[p - 1]);                     // code 从 0 开始，chars 从 0 开始，所以 p(1-2n-1) 要减 1
+            p = 2 * n - 1;                                  // 回到根结点编译下一个字符，只有从根节点到叶子结点才是一个字符的完整编码
+        }
+    }
+    printf("\n");
+}
+
 // ================== 测试案例：严书第三版148页例6-2 ==================
 int main() {
     // 例6-2：8个字符及其权值
     int w[] = {5, 29, 7, 8, 14, 23, 3, 11};
-    char ch[] = {' ', 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h'}; // 0号不用，从1开始对应
+    char ch[] = {'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h'}; // 0号不用，从1开始对应
     int n = sizeof(w) / sizeof(w[0]);
 
     printf("【严书第三版 例6-2】字符权值: ");
@@ -188,6 +206,46 @@ int main() {
     for (int i = 1; i <= n; ++i) free(HC2[i]);
     free(HC2);
     free(HT2);
+
+    printf("\n==== 测试 3: 译码测试 (HuffmanDecoding) ====\n");
+    // 重新建树用于译码（因为测试2的树被算法6.13修改过weight状态）
+    HuffmanTree HT3;
+    HuffmanCode HC3;
+    HuffmanCoding(&HT3, &HC3, w, n);
+
+    // 先打印编码表供参考
+    printf("编码表:\n");
+    for (int i = 1; i <= n; ++i) {
+        printf("%c: %s\n", ch[i], HC3[i]);
+    }
+
+    // 构造测试编码串: "afhe" -> a(0110) + f(1100) + h(101) + e(111)
+    // 注意: 不同Select实现可能导致编码不同，这里用实际生成的编码动态拼接
+    char testCode[100] = "";
+    // 测试译码 "face" 这4个字符: f + a + c + e
+    strcat(testCode, HC3[6]);  // 'f' 是第6个字符 (w[5]=23)
+    strcat(testCode, HC3[1]);  // 'a' 是第1个字符 (w[0]=5)
+    strcat(testCode, HC3[3]);  // 'c' 是第3个字符 (w[2]=7)
+    strcat(testCode, HC3[5]);  // 'e' 是第5个字符 (w[4]=14)
+
+    printf("\n待译码二进制串: %s\n", testCode);
+    printf("预期译码结果: face\n");
+    HuffmanDecoding(HT3, n, testCode, ch);
+
+    // 再测试一个: "bad"
+    char testCode2[100] = "";
+    strcat(testCode2, HC3[2]);  // 'b'
+    strcat(testCode2, HC3[1]);  // 'a'
+    strcat(testCode2, HC3[4]);  // 'd'
+
+    printf("\n待译码二进制串: %s\n", testCode2);
+    printf("预期译码结果: bad\n");
+    HuffmanDecoding(HT3, n, testCode2, ch);
+
+    // 释放内存
+    for (int i = 1; i <= n; ++i) free(HC3[i]);
+    free(HC3);
+    free(HT3);
 
     system("pause");
     return 0;
