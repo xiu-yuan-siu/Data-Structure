@@ -12,8 +12,8 @@
 #define MAX_VERTEX_NUM 20
 
 typedef enum { DG, DN, UDG, UDN };  // 图种类
-typedef int InfoType;           // 弧相关信息（权值等）
-typedef char VextexType;           // 顶点数据类型
+typedef int InfoType;               // 弧相关信息（权值等）
+typedef char VextexType;            // 顶点数据类型
 
 // 弧节点（链表）
 typedef struct ArcNode {        

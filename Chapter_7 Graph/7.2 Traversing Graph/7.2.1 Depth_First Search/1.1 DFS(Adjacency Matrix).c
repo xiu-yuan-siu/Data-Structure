@@ -128,7 +128,7 @@ void PrintGraph(MGraph G) {
     }
 }
 
-/* ---------------- DFS 全局变量 ---------------- */
+/* ---------------- DFS 遍历逻辑 ---------------- */
 Boolean visited[MAX_VERTEX_NUM];            // 访问标志数组，大小与顶点数相同，从 0 开始   
 Status (*VisitFunc)(VertexType v);          // 函数变量
 
@@ -174,10 +174,10 @@ void DFSTraverse(MGraph G, Status(*Visit)(VertexType v)) {
 
 /* ==================== 测试代码 ==================== */
 void redirect_input(const char *data) {
-    FILE *fp = fopen("test_input_tmp.txt", "w");
+    FILE *fp = fopen("Input_DFS_Adjacency_Matrix.txt", "w");
     fprintf(fp, "%s", data);
     fclose(fp);
-    freopen("test_input_tmp.txt", "r", stdin);
+    freopen("Input_DFS_Adjacency_Matrix.txt", "r", stdin);
 }
 
 // 专门测试图 7.13 的无向图 G4
@@ -208,7 +208,7 @@ void test() {
     Status s = CreateGraph(&G);
     if (s == OK) {
         PrintGraph(G);
-        printf("\n=> DFS遍历序列 (期望为 1 2 4 8 5 3 6 7): ");
+        printf("\n=> DFS遍历序列(从左到右) (期望为 1 2 4 8 5 3 6 7): \n");
         DFSTraverse(G, Visit);
         printf("\n");
         DestroyGraph(&G);
@@ -220,7 +220,7 @@ void test() {
 int main() {
     test();
     
-    remove("test_input_tmp.txt");
+    remove("Input_DFS_Adjacency_Matrix.txt");
     printf("\n========== 测试执行完毕 ==========\n");
 
     freopen("CON", "r", stdin); // 恢复键盘控制
