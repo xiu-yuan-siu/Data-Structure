@@ -10,6 +10,7 @@
 #define STATUS_H
 
 #include <stdio.h>
+#include <stdbool.h>
 
 /* 状态码 */
 #define TRUE        1   // 真/是
@@ -22,5 +23,8 @@
 
 /* 状态码类型 */
 typedef int Status;
+
+/* 布尔类型 */
+typedef bool Boolean;
 
 #endif

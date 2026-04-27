@@ -35,6 +35,7 @@ int LocateVex(MGraph G, VertexType u) {
 // 辅助函数: 输入弧的相关信息(此处简化为无信息输入, 仅分配空间示意)
 Status Input(InfoType *info) {
     // 若有额外信息，可扩展
+    // scanf(" %c", info); // 从缓冲区读取字符信息
     return OK;
 }
 
@@ -44,7 +45,7 @@ Status CreateDG(MGraph *G) {
     int IncInfo;
     VertexType v1, v2;
 
-    printf("========= 构造有向图 ==========\n");
+    printf("\n========= 构造有向图 ==========\n");
     printf("请输入有向图DG的顶点数、弧数、是否有弧信息(0/1): \n");
     scanf("%d %d %d", &G->vexnum, &G->arcnum, &IncInfo);
 
@@ -67,7 +68,7 @@ Status CreateDG(MGraph *G) {
         j = LocateVex(*G, v2);
         if (i == -1 || j == -1) return ERROR;
         // 给 adj 赋值
-        G->arcs[i][j].adj = 1;          // 网这里为权值
+        G->arcs[i][j].adj = 1;          // 图这里为 1
         // 给 info 赋值
         if (IncInfo) {                  // 若弧含有相关信息，则输入
             G->arcs[i][j].info = (InfoType*)malloc(sizeof(InfoType));
@@ -83,7 +84,7 @@ Status CreateDN(MGraph *G) {
     int IncInfo;
     VertexType v1, v2;
 
-    printf("========= 构造有向网 ==========\n");
+    printf("\n========= 构造有向网 ==========\n");
     printf("请输入有向网DN的顶点数、弧数、是否有弧信息(0/1): \n");
     scanf("%d %d %d", &G->vexnum, &G->arcnum, &IncInfo);
 
@@ -122,7 +123,7 @@ Status CreateUDG(MGraph *G) {
     int IncInfo;
     VertexType v1, v2;
 
-    printf("========= 构造无向图 ==========\n");
+    printf("\n========= 构造无向图 ==========\n");
     printf("请输入无向图UDG的顶点数、弧数、是否有弧信息(0/1): \n");
     scanf("%d %d %d", &G->vexnum, &G->arcnum, &IncInfo);
 
@@ -145,14 +146,16 @@ Status CreateUDG(MGraph *G) {
         j = LocateVex(*G, v2);
         if (i == -1 || j == -1) return ERROR;
         // 给 adj 赋值
-        G->arcs[i][j].adj = 1;          // 网这里为权值
+        G->arcs[i][j].adj = 1;          // 图这里为 1
+        G->arcs[j][i].adj = 1;          // 无向图/网这里要对称赋值
         // 给 info 赋值
         if (IncInfo) {                  // 若弧含有相关信息，则输入
             G->arcs[i][j].info = (InfoType*)malloc(sizeof(InfoType));
             Input(G->arcs[i][j].info);
+        } else {
+            G->arcs[i][j].info = NULL;
         }
-        G->arcs[j][i] = G->arcs[i][j];  // 无向图/网这里要对称赋值
-        G->arcs[j][i].info = NULL;      // 避免 DestroyGraph 是销毁 double free
+        G->arcs[j][i].info = NULL;      // 避免 DestroyGraph 时销毁 double free
     }
     return OK;
 }
@@ -163,7 +166,7 @@ Status CreateUDN(MGraph *G) {
     int IncInfo;
     VertexType v1, v2;
 
-    printf("========= 构造无向网 ==========\n");
+    printf("\n========= 构造无向网 ==========\n");
     printf("请输入无向网UDN的顶点数、弧数、是否有弧信息(0/1): \n");
     scanf("%d %d %d", &G->vexnum, &G->arcnum, &IncInfo);
 
@@ -187,13 +190,15 @@ Status CreateUDN(MGraph *G) {
         if (i == -1 || j == -1) return ERROR;
         // 给 adj 赋值
         G->arcs[i][j].adj = w;          // 网这里为权值
+        G->arcs[j][i].adj = w;          // 无向图/网这里要对称赋值
         // 给 info 赋值
         if (IncInfo) {                  // 若弧含有相关信息，则输入
             G->arcs[i][j].info = (InfoType*)malloc(sizeof(InfoType));
             Input(G->arcs[i][j].info);
+        } else {
+            G->arcs[i][j].info = NULL;
         }
-        G->arcs[j][i] = G->arcs[i][j];  // 无向图/网这里要对称赋值
-        G->arcs[j][i].info = NULL;      // 避免 DestroyGraph 是销毁 double free
+        G->arcs[j][i].info = NULL;      // 对称位置不分配 info，避免重复释放
     }
     return OK;
 }
@@ -201,7 +206,7 @@ Status CreateUDN(MGraph *G) {
 // 构造图 -- 对用户的接口 -- 算法 7.1
 Status CreateGraph(MGraph *G) {
     int kind;
-    printf("请输入图的种类(0=DF有向图, 1=DN有向网, 2=UDG无向图, 3=UDN无向网): ");
+    printf("请输入图的种类(0=DG有向图, 1=DN有向网, 2=UDG无向图, 3=UDN无向网): ");
     scanf("%d", &kind);
     G->kind = (GraphKind)kind;          // 通过枚举把数字转换成对应的string
     switch (G->kind) {
@@ -215,6 +220,10 @@ Status CreateGraph(MGraph *G) {
 
 // 释放动态分配的弧信息内存(数组逻辑销毁 -- 即不进行处理)
 void DestroyGraph(MGraph *G) {
+    if (G == NULL) {
+        printf("警告: 试图销毁空图\n");
+        return;
+    }
     for (int i = 0; i < G->vexnum; ++i) {
         for (int j = 0; j < G->vexnum; ++j) {
             if (G->arcs[i][j].info != NULL) {
@@ -223,6 +232,8 @@ void DestroyGraph(MGraph *G) {
             }
         }
     }
+    G->vexnum = 0;
+    G->arcnum = 0;
 }
 
 // 打印邻接矩阵

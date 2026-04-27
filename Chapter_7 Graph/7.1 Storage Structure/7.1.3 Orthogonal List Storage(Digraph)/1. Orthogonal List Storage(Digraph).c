@@ -47,15 +47,15 @@ Status CreateDG(OLGraph *G) {
     // 构造表头向量 -- O(n)
     printf("请输入 %d 个顶点信息(空格分隔):\n", G->vexnum);
     for (int i = 0; i < G->vexnum; ++i) {
-        scanf(" %c ", &G->xlist[i].data);                       // 初始化顶点信息
+        scanf(" %c", &G->xlist[i].data);                       // 初始化顶点信息
         G->xlist[i].firstin = G->xlist[i].firstout = NULL;      // 初始化弧指针
     }
     // 输入弧构造十字链表 -- O(e)
-    printf("请输入 %d 个弧（格式：弧尾 弧头）(换行分隔):", G->arcnum);
+    printf("请输入 %d 个弧（格式：弧尾 弧头）(换行分隔):\n", G->arcnum);
     int i, j;
     VertexType v1, v2;                      // 弧尾和弧头
     for (int k = 0; k < G->arcnum; ++k) {
-        scanf(" %c %c ", &v1, &v2);
+        scanf(" %c %c", &v1, &v2);
         i = LocateVex(*G, v1);          // 弧尾在数组中的位置
         j = LocateVex(*G, v2);          // 
         if (i == -1 || j == -1) return ERROR;
@@ -64,8 +64,10 @@ Status CreateDG(OLGraph *G) {
         *p = (ArcBox){i, j, G->xlist[j].firstin, G->xlist[i].firstout, NULL};   // 弧结点结构体赋值
         G->xlist[j].firstin = G->xlist[i].firstout = p;             // 弧头j入弧，弧尾i出弧
         if (IncInfo) {                                              // IncInfo 若弧有相关信息，则输入
+            p->info = (InfoType*)malloc(sizeof(InfoType));
+            if (!p) exit(OVERFLOW);
             printf("请输入弧的信息:\n");
-            scanf("%d", &(*p->info));
+            scanf("%d", p->info);
         }
     }
     return OK;
