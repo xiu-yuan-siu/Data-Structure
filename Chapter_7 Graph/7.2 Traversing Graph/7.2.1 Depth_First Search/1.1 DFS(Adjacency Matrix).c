@@ -3,7 +3,7 @@
 #include <limits.h>
 #include "../../../Status.h"
 
-/* ---------------- 邻接矩阵存储表示的DFS ---------------- */
+/* ---------------- 邻接矩阵存储表示的DFS(以书中无向图 G4 为测试案例，故而只写无向图创建的代码) ---------------- */
 #define INFINITY INT_MAX            // 最大值为int的最大值
 #define MAX_VERTEX_NUM 20
 typedef enum {DG, DN, UDG, UDN} GraphKind;
@@ -129,14 +129,16 @@ void PrintGraph(MGraph G) {
 }
 
 /* ---------------- DFS 全局变量 ---------------- */
-Boolean visited[MAX_VERTEX_NUM];        
-Status (*VisitFunc)(VertexType v);
+Boolean visited[MAX_VERTEX_NUM];            // 访问标志数组，大小与顶点数相同，从 0 开始   
+Status (*VisitFunc)(VertexType v);          // 函数变量
 
+// VisitFunc 案例 -- Visit
 Status Visit(VertexType v) {
     printf("%c ", v);
     return OK;
 }
 
+// 返回 v 的第一个邻接顶点
 int FirstAdjVex(MGraph G, int v) {
     for (int j = 0; j < G.vexnum; ++j) {
         if (G.arcs[v][j].adj != 0) return j;
@@ -144,28 +146,30 @@ int FirstAdjVex(MGraph G, int v) {
     return -1;
 }
 
+// 返回 v 的(相对于 w 的)下一个邻接顶点
 int NextAdjVex(MGraph G, int v, int w) {
-    for (int j = w + 1; j < G.vexnum; ++j) {                            
+    for (int j = w + 1; j < G.vexnum; ++j) {        // 从 w 的下一列开始找                        
         if (G.arcs[v][j].adj != 0) return j;
     }          
     return -1;
 }
 
 void DFS(MGraph G, int v) {
-    visited[v] = TRUE;
-    VisitFunc(G.vexs[v]);                               
-    for (int w = FirstAdjVex(G, v); w >= 0; w = NextAdjVex(G, v, w))
+    visited[v] = TRUE;                      // 更新 v 对应的访问标志数组
+    VisitFunc(G.vexs[v]);                   // 访问第 v 个顶点的数据                
+    for (int w = FirstAdjVex(G, v); w >= 0; w = NextAdjVex(G, v, w))    // 每个结点有多个邻接顶点，要进行遍历 -- O(n^2)
         if (!visited[w])
-            DFS(G, w);                      
+            DFS(G, w);                      // 对 v 尚未访问的邻接顶点 w 递归调用 DFS                     
 }
 
+// 图的深度优先遍历 -- O(n^2)(邻接矩阵，体现在调用DFS查找邻接点的两个函数中，相当于对 nxn 矩阵每个元素都遍历了一遍)
 void DFSTraverse(MGraph G, Status(*Visit)(VertexType v)) {
-    VisitFunc = Visit;                      
-    for (int v = 0; v < G.vexnum; ++v)      
+    VisitFunc = Visit;                      // 使用全局变量 VisitFunc, 使 DFS 不必设函数指针参数                 
+    for (int v = 0; v < G.vexnum; ++v)      // 初始化标志数组(0-G.vexnum均为 FALSE, 表示未访问)
         visited[v] = FALSE;
     for (int v = 0; v < G.vexnum; ++v)      
         if (!visited[v])                    
-            DFS(G, v);                      
+            DFS(G, v);                      // 对尚未访问的顶点调用 DFS       
 }
 
 /* ==================== 测试代码 ==================== */
