@@ -178,7 +178,6 @@ typedef struct VNode {              // 顶点结点
 typedef struct {
     AdjList vertices;               // 顶点结点数组
     int vexnum, arcnum;
-    int kind;
 } ALGraph;                          // Adjacency List
 
 // 查找顶点 u 在图中的位置，若存在返回下标，否则返回 -1
