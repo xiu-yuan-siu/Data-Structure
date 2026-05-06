@@ -42,10 +42,10 @@ Status TopologicalSort(ALGraph G) {
 
     FindInDegree(G);                  // 对个顶点求入度 base=0
     InitStack(&S);
-    for (i = 0; i < G.vexnum; ++i)                          // 建零入度顶点栈
+    for (i = 0; i < G.vexnum; ++i)                          // 建零入度顶点栈 -- O(n)
         if (G.vertices[i].indegree == 0) Push(&S, i);       // 入度为 0 的顶点进栈(注意这里 i 和 SElemType 刚好为 int)
     count = 0;                                              // 计数已输出的顶点数
-    while (!StackEmpty(S)) {
+    while (!StackEmpty(S)) {                                // O(e)
         Pop(&S, i);                             // 栈顶元素出栈
         printf("%c ", G.vertices[i].data);      // 输出第 i 个顶点
         ++count;                                // 输出顶点计数
