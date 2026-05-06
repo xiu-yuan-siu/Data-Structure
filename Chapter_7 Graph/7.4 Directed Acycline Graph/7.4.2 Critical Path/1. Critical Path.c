@@ -118,7 +118,7 @@ void FindInDegree(ALGraph G, int indegree[]) {
 // 全局变量: 各顶点的最早发生时间
 int ve[MAX_VERTEX_NUM];
 
-// 正拓扑排序求各顶点的最早发生时间 ve (全局变量)，逆拓扑排序求各顶点的最迟发生时间 vl (在CriticalPath函数中)
+// 正拓扑排序求各顶点的最早发生时间 ve (全局变量)，逆拓扑排序求各顶点的最迟发生时间 vl (在CriticalPath函数中) -- 时间复杂度O(n+e)
 Status TopologicalOrder(ALGraph G, SqStack *T) {
     // 初始化栈，T 为返回的拓扑序列顶点栈，S 为零入度顶点栈
     SqStack S;
@@ -128,7 +128,7 @@ Status TopologicalOrder(ALGraph G, SqStack *T) {
     int indegree[MAX_VERTEX_NUM];
     FindInDegree(G, indegree);                      
     // 初始化 ve
-    for (int i = 0; i < G.vexnum; ++i) 
+    for (int i = 0; i < G.vexnum; ++i)      // O(n)
         ve[i] = 0;
     // 建零入度栈
     for (int i = 0; i < G.vexnum; ++i) {
@@ -137,7 +137,7 @@ Status TopologicalOrder(ALGraph G, SqStack *T) {
     }
 
     int count = 0;                          // 记录拓扑序列顶点数，用于判断是否成环
-    while (!StackEmpty(S)) {
+    while (!StackEmpty(S)) {                // O(e)
         int j;
         Pop(&S, &j);
         Push(T, j);                         // 拓扑序列元素入栈 T, T 为返回的拓扑序列
@@ -154,15 +154,15 @@ Status TopologicalOrder(ALGraph G, SqStack *T) {
     else return OK;
 }
 
-// 输出有向网 G 的各项关键活动
+// 输出有向网 G 的各项关键活动 -- 时间复杂度 O(n+e)
 Status CriticalPath(ALGraph G) {
     SqStack T;
     if (!TopologicalOrder(G, &T)) return ERROR;         // 有环无法逆拓扑排序和求关键路径
 
     int vl[MAX_VERTEX_NUM];                             // 所有顶点最迟发生时间
-    for (int i = 0; i < G.vexnum; ++i) 
+    for (int i = 0; i < G.vexnum; ++i)                  // O(n)
         vl[i] = ve[G.vexnum-1];                         // 初始化顶点事件的最迟发生时间 -- 所有顶点初始化为汇点的最早发生时间 (即工程总工期)
-    while (!StackEmpty(T)) {                            // 按拓扑逆序求各顶点的 vl 值
+    while (!StackEmpty(T)) {                            // 按拓扑逆序求各顶点的 vl 值 -- O(e)
         int j;
         Pop(&T, &j);
         for (ArcNode *p = G.vertices[j].firstarc; p; p = p->nextarc) {
@@ -175,9 +175,9 @@ Status CriticalPath(ALGraph G) {
     printf("\n关键活动判定 (ee == el):\n");
     printf("Start\tEnd\tDut\tee\tel\tTag\n");
     printf("----\t---\t---\t--\t--\t---\n");
-    // 求 ee, el, 关键活动
-    for (int j = 0; j < G.vexnum; ++j) {
-        for (ArcNode *p = G.vertices[j].firstarc; p; p = p->nextarc) {
+    // 求 ee, el, 关键活动 -- O()
+    for (int j = 0; j < G.vexnum; ++j) {                // O(n)
+        for (ArcNode *p = G.vertices[j].firstarc; p; p = p->nextarc) {      // O(e)
             int k = p->adjvex;
             int dut = *(p->info);
             int ee = ve[j];
