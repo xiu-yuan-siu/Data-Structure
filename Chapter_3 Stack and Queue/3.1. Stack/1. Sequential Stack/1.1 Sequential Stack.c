@@ -117,8 +117,8 @@ void TestStack() {
     printf("测试完成。\n");
 }
 
-int main() {
-    TestStack();
-    system("pause");
-    return 0;
-}
+// int main() {
+//     TestStack();
+//     system("pause");
+//     return 0;
+// }

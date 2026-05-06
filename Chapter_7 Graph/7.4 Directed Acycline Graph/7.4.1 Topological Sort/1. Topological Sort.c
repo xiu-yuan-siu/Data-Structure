@@ -46,7 +46,7 @@ Status TopologicalSort(ALGraph G) {
         if (G.vertices[i].indegree == 0) Push(&S, i);       // 入度为 0 的顶点进栈(注意这里 i 和 SElemType 刚好为 int)
     count = 0;                                              // 计数已输出的顶点数
     while (!StackEmpty(S)) {                                // O(e)
-        Pop(&S, i);                             // 栈顶元素出栈
+        Pop(&S, &i);                            // 栈顶元素出栈
         printf("%c ", G.vertices[i].data);      // 输出第 i 个顶点
         ++count;                                // 输出顶点计数
         for (p = G.vertices[i].firstarc; p; p = p->nextarc) {
