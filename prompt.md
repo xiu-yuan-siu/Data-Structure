@@ -5,7 +5,46 @@
 2. 双向链表的实现，C语言和C++各写出来，函数包括初始化，销毁，清空，获取元素（传位置），返回位序，获取前驱，获取后继，插入，删除，合并，打印(用于测试)可适当补充或增减上述所说的函数，按照书里面的要求来, 并写上C和C++的测试案例，测试所有功能和边界错误的处理
 
 ```c
+void ShortestPath_FLOYD(MGraph G, PathMatrix *P, DistanceMatrix *D) {
+    int v, w, u, i;
 
+    // 1. 初始化 D 和 P
+    for (v = 0; v < G.vexnum; ++v) {
+        for (w = 0; w < G.vexnum; ++w) {
+            (*D)[v][w] = G.arcs[v][w]; // D[v][w] 初始化为直接距离
+            
+            // 初始化路径矩阵 P
+            for (u = 0; u < G.vexnum; ++u) 
+                (*P)[v][w][u] = false;   // 设空路径
+            
+            if ((*D)[v][w] < INFINITY) { // 从 v 到 w 有直接路径
+                (*P)[v][w][v] = true; 
+                (*P)[v][w][w] = true; 
+            }
+        }
+    }
+    // 2. 核心三重循环
+    // u 代表允许作为中间顶点的序号，从 0 到 n-1
+    for (u = 0; u < G.vexnum; ++u) {
+        for (v = 0; v < G.vexnum; ++v) {
+            for (w = 0; w < G.vexnum; ++w) {
+                // 如果经过 u 的路径更短
+                // 注意：这里需要判断 D[v][u] 和 D[u][w] 是否连通，防止 INFINITY 相加溢出或逻辑错误
+                if ((*D)[v][u] != INFINITY && (*D)[u][w] != INFINITY) {
+                    if ((*D)[v][u] + (*D)[u][w] < (*D)[v][w]) { 
+                        (*D)[v][w] = (*D)[v][u] + (*D)[u][w]; // 更新距离
+                        
+                        // 更新路径集合 P[v][w]
+                        // P[v][w] = P[v][u] ∪ P[u][w]
+                        for (i = 0; i < G.vexnum; ++i) {
+                            (*P)[v][w][i] = (*P)[v][u][i] || (*P)[u][w][i];
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
 ```
 
 ```cpp
