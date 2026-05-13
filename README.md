@@ -1,4 +1,4 @@
-# 📚 DataStructure-408
+# 📚 Data-Structure-408
 
 <p align="center">
   <img src="https://img.shields.io/badge/数据结构-408-red?style=flat-square"/>
@@ -10,7 +10,9 @@
 </p>
 
 > **严蔚敏《数据结构（第三版）》教材级 C/C++ 完整实现**  
-> 从顺序表到哈夫曼树，从 KMP 到 Floyd，每一行代码都配有详细中文注释。  
+> **严格基于教材伪代码**实现，对于想基于原书学习的人友好。
+> 所有数据结构(前 7 章)均有**测试案例**。
+> 408 频率：使用**claude + Deepseek-V4-pro(max)联网搜索**，基于 2009-2024 年真题统计评估了 408  重要程度。
 > 专为 **408 考研**、**数据结构自学**、**底层原理钻研者** 设计。
 
 ---
@@ -59,7 +61,7 @@
 
 ## ✨ 项目特点
 
-### 📝 极其详细的中文注释
+### 📝 1.极其详细的中文注释
 
 ```c
 // 下面两步不能交换位置
@@ -69,7 +71,7 @@ p->next = s;
 
 每一处"先做什么、再做什么、为什么不能反过来"都有注释说明。
 
-### 📖 保留教材原始思想
+### 📖 2.严格基于严书教材源代码
 
 严格遵循严蔚敏教材的 **ADT 定义** 和 **算法描述**，使用 `Status` 返回值、`ElemType` 泛型、`typedef` 重定义等经典教材写法。
 
@@ -91,149 +93,148 @@ p->next = s;
 
 ### 🎯 面向 408 考研
 
-覆盖全部 408 数据结构考点：
+覆盖全部 408 数据结构考点（基于 **2009~2024 历年真题统计** 重新评估）：
 
-| 知识点 | 实现位置 | 408 频率 |
-|--------|----------|----------|
-| 顺序表 / 链表 | 第2章 | ⭐⭐⭐⭐⭐ |
-| 栈的应用（括号匹配 / 表达式求值） | 第3章 | ⭐⭐⭐⭐⭐ |
-| KMP 算法及改进 | 第4章 | ⭐⭐⭐⭐⭐ |
-| 二叉树遍历（递归/非递归） | 第6章 | ⭐⭐⭐⭐⭐ |
-| 线索二叉树 | 第6章 | ⭐⭐⭐⭐ |
-| Huffman 编码 | 第6章 | ⭐⭐⭐⭐ |
-| 图的 DFS / BFS | 第7章 | ⭐⭐⭐⭐⭐ |
-| Prim / Kruskal | 第7章 | ⭐⭐⭐⭐ |
-| Dijkstra / Floyd | 第7章 | ⭐⭐⭐⭐⭐ |
-| 拓扑排序 / 关键路径 | 第7章 | ⭐⭐⭐⭐ |
-| 折半查找 / 分块查找 | 第9章 | ⭐⭐⭐⭐ |
-| 哈希表 | 第9章 | ⭐⭐⭐⭐ |
+| 知识点 | 实现位置 | 408 频率 | 依据 |
+|--------|----------|:--------:|------|
+| 二叉树遍历（递归/非递归） | 第6章 | ⭐⭐⭐⭐⭐ | 每年选择题 2~3 道，大题几乎每年涉及 |
+| 图的基本概念与存储 | 第7章 | ⭐⭐⭐⭐⭐ | 邻接矩阵 vs 邻接表是 408 选择题常客 |
+| 顺序表 / 链表 | 第2章 | ⭐⭐⭐⭐⭐ | 每年必考，42 题代码题高频 |
+| 图的 DFS / BFS | 第7章 | ⭐⭐⭐⭐⭐ | 遍历是图算法的基础，选择+大题双杀 |
+| 最小生成树（Prim/Kruskal） | 第7章 | ⭐⭐⭐⭐ | 历年大题多次考察 |
+| 最短路径（Dijkstra/Floyd） | 第7章 | ⭐⭐⭐⭐⭐ | Floyd 动态规划思想是高频大题 |
+| 拓扑排序 / 关键路径 | 第7章 | ⭐⭐⭐⭐ | AOE 网关键路径是大题经典考点 |
+| 栈的应用（括号匹配/表达式求值） | 第3章 | ⭐⭐⭐⭐ | 选择题高频，近5年出现4次 |
+| 循环队列判空/判满 | 第3章 | ⭐⭐⭐⭐ | 重要选择题考点（模运算） |
+| KMP 算法及 next 数组 | 第4章 | ⭐⭐⭐ | 选择题几乎每年1道，大题偶有 |
+| 线索二叉树 | 第6章 | ⭐⭐⭐ | 中序线索化是核心 |
+| Huffman 树与编码 | 第6章 | ⭐⭐⭐⭐ | 大题考过多次（构造过程+编码） |
+| 树/森林与二叉树转换 | 第6章 | ⭐⭐⭐⭐ | 选择题高频，重要转换规则 |
+| 折半查找 / 判定树 | 第9章 | ⭐⭐⭐⭐ | 选择题常考，ASL 计算 |
+| B 树 / B+ 树 | 第9章 | ⭐⭐⭐⭐ | 近年热门考点，选择+大题均可出现 |
+| 哈希表 / 冲突处理 | 第9章 | ⭐⭐⭐⭐ | 选择题常考（除留余数法+探测） |
+| 排序算法对比 | 第10章 | ⭐⭐⭐⭐ | 快排/堆排/归并是重点（待补充代码） |
+| 稀疏矩阵（十字链表） | 第5章 | ⭐⭐⭐ | 选择题为主，偶尔考大题 |
+| 绪论（时间复杂度） | 第1章 | ⭐⭐ | 每年可能有1道概念/复杂度选择题 |
+| 动态存储管理 | 第8章 | ⭐ | 历年几乎不考，可跳过 |
 
 ---
 
 ## 🏗️ 项目结构
 
 ```
-DataStructure-408/
+Data-Structure/
 │
-├── README.md                         ← 你正在看的就是
-├── LICENSE
+├── README.md
+├── Status.h                          ← 全局状态码定义（TRUE/FALSE/OK/ERROR/OVERFLOW）
 ├── .gitignore
+├── .vscode/                          ← VS Code 编辑器配置
 │
-├── Include/
-│   └── Status.h                      ← 全局状态码定义（TRUE/FALSE/OK/ERROR/OVERFLOW）
+├── Chapter_1 Introduction/           ── 第1章：绪论
+│   ├── 1.3 Abstract Data Type.cpp    ── 复数 ADT 实现
+│   ├── 1.3 Triplet(c).cpp            ── 三元组 C 风格（指针传参）
+│   └── 1.3 Triplet(cpp).cpp          ── 三元组 C++ 风格（引用传参）
 │
-├── Chapter01_Introduction/           ── 第1章：绪论
-│   └── AbstractDataType/             ── 抽象数据类型
-│       ├── ComplexADT.cpp            ── 复数 ADT 实现（赋值、加减乘除）
-│       ├── Triplet_C.cpp             ── 三元组 C 风格实现
-│       └── Triplet_CPP.cpp           ── 三元组 C++ 风格实现（引用传参）
+├── Chapter_2 Linear List/            ── 第2章：线性表 ★★★★★
+│   ├── 2.1 Sequential List/          ── 顺序表（动态数组）
+│   ├── 2.2 Linked List/              ── 单链表（带头结点，含 .h 头文件）
+│   ├── 2.3 Static Linked List/       ── 静态链表（数组模拟链表）
+│   ├── 2.4 Circular Linked List/     ── 循环链表（尾指针）
+│   ├── 2.5 Double Linked List/       ── 双向链表（prior + next 双链）
+│   └── 2.6 Polynomial/               ── 多项式的表示与相加
 │
-├── Chapter02_LinearList/             ── 第2章：线性表 ★★★ 核心基础
-│   ├── SequentialList/               ── 顺序表（动态数组）
-│   │   ├── SequentialList_C.cpp      ── C 风格：malloc/free、ElemType* 指针
-│   │   └── SequentialList_CPP.cpp    ── C++ 风格：引用、new/delete
-│   ├── LinkedList/                   ── 单链表（带头结点）
-│   │   ├── LinkList.c                ── C 实现：带头结点、头插法、尾插法、合并
-│   │   ├── LinkList.h                ── 链表头文件（typedef LNode, *LinkList）
-│   │   └── LinkList_CPP.cpp          ── C++ 实现
-│   ├── StaticLinkedList/             ── 静态链表（数组模拟链表）
-│   ├── CircularLinkedList/           ── 循环链表（尾指针指向头结点）
-│   ├── DoubleLinkedList/             ── 双向链表（prior + next 双链）
-│   └── Polynomial/                   ── 多项式（链式存储 + 加法运算）
+├── Chapter_3 Stack and Queue/        ── 第3章：栈与队列 ★★★★
+│   ├── 3.1. Stack/
+│   │   ├── 3.1.1 Sequential Stack/   ── 顺序栈（动态扩容，含 .h 头文件）
+│   │   ├── 3.1.2 Linked Stack/       ── 链栈
+│   │   ├── 3.1.3 Number Conversion/  ── 数制转换（N 进制）
+│   │   ├── 3.1.4 Bracket Matching/   ── 括号匹配 ★★★★★
+│   │   ├── 3.1.5 Line Editor/        ── 行编辑器（#退格 @清行）
+│   │   ├── 3.1.6 Maze Solver/        ── 迷宫求解（回溯法）
+│   │   └── 3.1.7 Expression Eval/    ── 表达式求值（算符优先）★★★★★
+│   ├── 3.2 Stack and Recursion/
+│   │   ├── 3.2.1 Factorial/          ── 递归：阶乘
+│   │   └── 3.2.2 Hanoi/              ── 递归：汉诺塔
+│   └── 3.3. Queue/
+│       ├── 3.3.1 Single Linked Queue/  ── 链队列
+│       ├── 3.3.2 Sequential Circular Queue/ ── 循环队列
+│       └── 3.3.3 Bank Simulation/    ── 银行排队模拟
 │
-├── Chapter03_StackAndQueue/          ── 第3章：栈与队列 ★★★ 应用广泛
-│   ├── Stack_Sequential/             ── 顺序栈（动态扩容）
-│   │   ├── SequentialStack.c         ── C 实现（base/top/stacksize）
-│   │   ├── SequentialStack.h         ── 栈头文件（被第6、7章引用）
-│   │   └── SequentialStack.cpp       ── C++ 实现
-│   ├── Stack_Linked/                 ── 链栈（无需预估容量）
-│   ├── Stack_NumberConversion/       ── 栈应用：数制转换（N 进制）
-│   ├── Stack_BracketMatching/        ── 栈应用：括号匹配
-│   ├── Stack_LineEditor/             ── 栈应用：行编辑器（#退格 @清行）
-│   ├── Stack_MazeSolver/             ── 栈应用：迷宫求解（回溯法）
-│   ├── Stack_ExpressionEvaluation/   ── 栈应用：表达式求值（算符优先）
-│   ├── Recursion_Factorial/          ── 递归：阶乘（理解递归本质）
-│   ├── Recursion_Hanoi/              ── 递归：汉诺塔（经典递归思想）
-│   ├── Queue_Linked/                 ── 链队列（带头结点）
-│   ├── Queue_Circular/               ── 循环队列（留空判满）
-│   └── Queue_BankSimulation/         ── 队列应用：银行排队模拟
+├── Chapter_4 String/                 ── 第4章：串 ★★★
+│   ├── 4.1 Fixed-length Sequential String/ ── 定长顺序串（SString）
+│   ├── 4.2 Head Allocation String/   ── 堆分配串（HString，含 .h 头文件）
+│   ├── 4.3 Block Chain String/       ── 块链串
+│   ├── 4.4 String Pattern Matching Algorithm/
+│   │   ├── 1. BF(Brute Force) Algorithm.c ── 暴力匹配
+│   │   ├── 2. KMP Algorithm.c        ── KMP 算法（next 数组推导）★★★★★
+│   │   └── 3. KMP Algorithm Improvement.c ── KMP 改进（nextval）
+│   └── 4.5 String Application/
+│       ├── 4.5.1 Text Editor/        ── 文本编辑器
+│       └── 4.5.2 Word Index Table/   ── 单词索引表（含测试数据文件）
 │
-├── Chapter04_String/                 ── 第4章：串 ★★★ KMP 核心
-│   ├── FixedLengthString/            ── 定长顺序串（SString 类型）
-│   ├── HeapAllocationString/         ── 堆分配串（HString 动态分配）
-│   ├── BlockChainString/             ── 块链串（链表存储）
-│   ├── PatternMatching/              ── 模式匹配 ★★★ 重中之重
-│   │   ├── BF_BruteForce.c           ── 暴力匹配（O(m×n)）
-│   │   ├── KMP.c                     ── KMP 算法（附 next 数组推导详解）
-│   │   └── KMP_Improved.c            ── KMP 改进（nextval 数组 + 统计比较次数）
-│   └── Application/
-│       ├── TextEditor/               ── 文本编辑器（串操作综合应用）
-│       └── WordIndex/                ── 单词索引表（串的查找与排序）
+├── Chapter_5 Array and Generalized List/ ── 第5章：数组与广义表 ★★★
+│   ├── 5.1 Array/
+│   │   ├── 5.1.1 Sequential Storage/ ── 数组顺序存储（行优先/列优先）
+│   │   └── 5.1.2 Sparse Matrix/
+│   │       ├── 1.1 Triple Sequential Table.c    ── 三元组顺序表
+│   │       ├── 2.1 Row Linked Triple Sequential Table.c ── 行逻辑链接顺序表
+│   │       └── 3.1 Orthogonal List.c ── 十字链表 ★★★★
+│   └── 5.2 Generalized List/
+│       ├── 5.2.1 Head and Tail Linked List/   ── 头尾链表存储
+│       ├── 5.2.2 Extended Linear Linked List/ ── 扩展线性链表
+│       ├── 5.2.3 m-ary Polynomial/            ── m 元多项式
+│       └── 5.2.4 Recursive Algorithm/         ── 递归算法
 │
-├── Chapter05_ArrayAndGeneralizedList/ ── 第5章：数组与广义表
-│   ├── Array_SequentialStorage/      ── 数组的顺序存储（行优先/列优先）
-│   ├── SparseMatrix_Triple/          ── 稀疏矩阵：三元组顺序表
-│   ├── SparseMatrix_RowLinked/       ── 稀疏矩阵：行逻辑链接顺序表
-│   ├── SparseMatrix_OrthogonalList/  ── 稀疏矩阵：十字链表 ★★★ 难点
-│   ├── GeneralizedList_HeadTail/     ── 广义表：头尾链表存储
-│   ├── GeneralizedList_Extended/     ── 广义表：扩展线性链表
-│   ├── GeneralizedList_MAryPolynomial/ ── 广义表：m 元多项式
-│   └── GeneralizedList_Recursion/    ── 广义表：递归算法
+├── Chapter_6 Tree and Binary Tree/  ── 第6章：树与二叉树 ★★★★★（分值最高）
+│   ├── 6.1 Binary Tree/
+│   │   ├── 6.1.1 Sequential Storage/ ── 顺序存储（仅适合完全二叉树）
+│   │   └── 6.1.2 Chain Storage/
+│   │       ├── 1.1 Binary Linked List.c       ── 二叉链表（递归/非递归遍历）★★★
+│   │       ├── 2.1 Trigeminal Linked List.c   ── 三叉链表（含 parent 指针）
+│   │       └── 3.1 Binary Threaded Linked List.c ── 线索二叉树 ★★★★
+│   ├── 6.2 Tree and Forest/
+│   │   ├── 6.2.1 Parental Table Storage/     ── 双亲表示法
+│   │   ├── 6.2.2 Children Linked List Storage/ ── 孩子链表表示法
+│   │   ├── 6.2.3 Linked List of Children with Parent/ ── 带双亲的孩子链表
+│   │   ├── 6.2.4 Children-Siblings Storage/  ── 孩子兄弟表示法
+│   │   └── 6.2.5 Transformation among Tree, Forest and Binary Tree/ ── 树、森林与二叉树的转换 ★★★★
+│   ├── 6.3 Tree and Equivalence Problem/
+│   │   └── 6.3.1 Merge Find Set/     ── 并查集（MFSet）
+│   ├── 6.4 Huffman Tree/
+│   │   └── 6.4.1 Huffman Coding/     ── 哈夫曼树与哈夫曼编码 ★★★★
+│   └── 6.5 Backtracking Method and Tree Traversal/
+│       ├── 6.5.1 Power Set/          ── 幂集
+│       ├── 6.5.2 Four Queens Puzzle/ ── 四皇后 ★★★
+│       ├── 6.5.3 Knight's Tour/      ── 骑士周游
+│       ├── 6.5.4 Maze Solving/       ── 迷宫（回溯版）
+│       └── 6.5.5 Optimization/       ── 优化问题
 │
-├── Chapter06_Tree/                   ── 第6章：树与二叉树 ★★★★★ 最重要
-│   ├── BinaryTree_Sequential/        ── 二叉树顺序存储（仅适合完全二叉树）
-│   ├── BinaryTree_LinkedList/        ── 二叉链表 ★★★ 核心
-│   │   ├── BinaryLinkedList.c        ── 先序/中序/后序递归遍历 + 非递归中序
-│   │   └── BinaryLinkedList.cpp      ── C++ 版
-│   ├── BinaryTree_Trigeminal/        ── 三叉链表（含 parent 指针）
-│   ├── BinaryTree_Threaded/          ── 线索二叉树 ★★★
-│   │   ├── ThreadedBinaryTree.c      ── 中序线索化 + 非递归中序遍历
-│   │   └── ThreadedBinaryTree.cpp
-│   ├── Tree_ParentalTable/           ── 树：双亲表示法
-│   ├── Tree_ChildrenLinkedList/      ── 树：孩子链表表示法
-│   ├── Tree_ChildrenWithParent/      ── 树：带双亲的孩子链表
-│   ├── Tree_ChildrenSiblings/        ── 树：孩子兄弟表示法（二叉树转换）
-│   ├── Tree_ForestTransformation/    ── 树、森林与二叉树的转换 ★★★ 考点
-│   ├── UnionFindSet/                 ── 并查集（Merge Find Set）
-│   ├── HuffmanTree/                  ── 哈夫曼树与哈夫曼编码 ★★★
-│   │   ├── HuffmanCoding.c           ── 构造树 + 求编码（含无栈非递归遍历）
-│   │   └── HuffmanCoding.cpp
-│   ├── Backtracking_PowerSet/        ── 回溯法：幂集
-│   ├── Backtracking_FourQueens/      ── 回溯法：四皇后 ★★★ 典型
-│   ├── Backtracking_KnightTour/      ── 回溯法：骑士周游（Warnsdorff 启发式）
-│   ├── Backtracking_Maze/            ── 回溯法：迷宫
-│   └── Backtracking_Optimization/    ── 回溯法：优化问题
+├── Chapter_7 Graph/                  ── 第7章：图 ★★★★★（难度最高）
+│   ├── 7.1 Storage Structure/
+│   │   ├── 7.1.1 Array(Adjacency Matrix) Storage/ ── 邻接矩阵
+│   │   ├── 7.1.2 Adjacency List Storage/          ── 邻接表
+│   │   ├── 7.1.3 Orthogonal List Storage(Digraph)/ ── 十字链表（有向图）
+│   │   └── 7.1.4 Adjacency Multilist Table Storage(Undigraph)/ ── 邻接多重表
+│   ├── 7.2 Traversing Graph/
+│   │   ├── 7.2.1 Depth_First Search/  ── DFS（矩阵版+邻接表版，含输入文件）
+│   │   └── 7.2.2 Broadth_First Search/ ── BFS（含测试数据）
+│   ├── 7.3 Connectivity of Graph/
+│   │   ├── 7.3.1 Connected Components and Spanning Tree/ ── 连通分量与生成树
+│   │   ├── 7.3.2 Stronglyl Connected Component/ ── 强连通分量
+│   │   ├── 7.3.3 Minimum Cost Spanning Tree/
+│   │   │   ├── 1.1 Prim Algorithm.c   ── Prim 算法 ★★★★
+│   │   │   └── 2.1 Kruskal Algorithm.c ── Kruskal 算法 ★★★★
+│   │   └── 7.3.4 Articulation Point and Biconnected Graph/ ── 关节点
+│   ├── 7.4 Directed Acycline Graph/
+│   │   ├── 7.4.1 Topological Sort/    ── 拓扑排序 ★★★★
+│   │   └── 7.4.2 Critical Path/       ── 关键路径（AOE 网）★★★★
+│   └── 7.5 Shortest Path/
+│       ├── 7.5.1 Source to Vertex/    ── Dijkstra 算法 ★★★★★
+│       └── 7.5.2 Vertex to Vertex/    ── Floyd 算法 ★★★★★
 │
-├── Chapter07_Graph/                  ── 第7章：图 ★★★★★ 最复杂
-│   ├── Storage_AdjacencyMatrix/      ── 邻接矩阵（数组）存储
-│   ├── Storage_AdjacencyList/        ── 邻接表（链式）存储
-│   ├── Storage_OrthogonalList/       ── 十字链表（有向图）★★★
-│   ├── Storage_AdjacencyMultilist/   ── 邻接多重表（无向图）
-│   ├── Traversal_DFS/                ── 深度优先搜索 ★★★
-│   │   ├── DFS_Matrix.c              ── 邻接矩阵上的 DFS
-│   │   └── DFS_List.c                ── 邻接表上的 DFS
-│   ├── Traversal_BFS/                ── 广度优先搜索 ★★★
-│   ├── Connectivity_SpanningTree/    ── 连通分量与生成树/森林
-│   ├── Connectivity_StronglyConnected/ ── 有向图的强连通分量
-│   ├── MST_Prim/                     ── Prim 算法（最小生成树）★★★
-│   ├── MST_Kruskal/                  ── Kruskal 算法（最小生成树）★★★
-│   ├── Connectivity_ArticulationPoint/ ── 关节点与重连通分量
-│   ├── DAG_TopologicalSort/          ── 拓扑排序 ★★★
-│   ├── DAG_CriticalPath/             ── 关键路径（AOE 网）★★★
-│   ├── ShortestPath_Dijkstra/        ── Dijkstra 算法（单源最短路径）★★★
-│   └── ShortestPath_Floyd/           ── Floyd 算法（顶点间最短路径）★★★
+├── Chapter_8 Dynamic Storage/         ── 第8章：动态存储管理（待补充，非408重点）
 │
-├── Chapter08_DynamicStorage/         ── 第8章：动态存储管理
-│
-├── Chapter09_Search/                 ── 第9章：查找
-│   ├── SequentialSearch/             ── 顺序查找（哨兵优化）
-│   ├── BinarySearch/                 ── 折半查找（二分查找）
-│   ├── BlockSearch/                  ── 分块查找（索引顺序表）
-│   └── HashTable/                    ── 哈希表（待补充）
-│
-├── Chapter10_Sort/                   ── 第10章：内部排序（待补充）
-├── Chapter11_ExternalSort/           ── 第11章：外部排序（待补充）
-└── Chapter12_File/                   ── 第12章：文件（待补充）
+└── Chapter_9 Search/                 ── 第9章：查找（新添加，内容待完善）
 ```
 
 ---
@@ -249,7 +250,7 @@ DataStructure-408/
    ↓
 串 + KMP（第4章）
    ↓
-数组与广义表（第5章）
+数组与广义表（第5章）（可跳过，非重点）
    ↓
 树与二叉树（第6章） ← ← ← 是图的基础
    ↓
@@ -260,18 +261,21 @@ DataStructure-408/
 排序（第10章）
 ```
 
-### 408 备考优先级
+### 408 备考优先级（基于 2009~2024 真题统计）
 
 | 优先级 | 章节 | 原因 |
 |--------|------|------|
-| ⭐⭐⭐⭐⭐ | 第2章 线性表 | 每年必考，代码题高频 |
-| ⭐⭐⭐⭐⭐ | 第6章 树 | 选择题+大题，分值最高 |
-| ⭐⭐⭐⭐⭐ | 第7章 图 | 算法题最难，区分度最高 |
-| ⭐⭐⭐⭐ | 第3章 栈与队列 | 栈的应用是408常客 |
-| ⭐⭐⭐⭐ | 第4章 KMP | 选择题必考，理解难度大 |
-| ⭐⭐⭐⭐ | 第9章 查找 | 折半查找+哈希常考 |
-| ⭐⭐⭐ | 第5章 数组/稀疏矩阵 | 选择题为主 |
-| ⭐⭐⭐ | 第10章 排序 | 各类排序对比是重点 |
+| ⭐⭐⭐⭐⭐ | 第6章 树与二叉树 | 选择题每年2~3道，大题几乎每年涉及，分值最高 |
+| ⭐⭐⭐⭐⭐ | 第7章 图 | 算法题最难，区分度最高，Dijkstra/Floyd 是大题常客 |
+| ⭐⭐⭐⭐⭐ | 第2章 线性表 | 每年必考，42 题代码题高频（链表操作） |
+| ⭐⭐⭐⭐ | 第3章 栈与队列 | 选择题高频（循环队列判空/满），栈的应用是常客 |
+| ⭐⭐⭐⭐ | 第9章 查找 | B树/B+树是近年热门，折半查找+哈希选择/大题均可考 |
+| ⭐⭐⭐⭐ | 第10章 排序 | 快排/堆排/归并排序对比是重点（代码待补充） |
+| ⭐⭐⭐ | 第4章 串/KMP | 选择题几乎每年1道，KMP next数组推导是核心 |
+| ⭐⭐⭐ | 第5章 数组与广义表 | 稀疏矩阵/十字链表选择题为主 |
+| ⭐⭐ | 第1章 绪论 | 偶有1道概念/时间复杂度选择题 |
+| ⭐ | 第8章 动态存储管理 | 历年几乎不考，时间紧张可跳过 |
+| ⭐ | 第11/12章 外部排序/文件 | 偶有涉及，非重点 |
 
 ### 最容易错的点
 
@@ -370,9 +374,9 @@ p->next = s;          // 再让前驱指向新结点
 | 应用 | 核心思想 | 408 频率 |
 |------|----------|----------|
 | **数制转换** | 除基取余法，先求的余数后输出（LIFO） | ⭐⭐⭐ |
-| **括号匹配** | 左括号入栈，右括号匹配则出栈，最后栈空则合法 | ⭐⭐⭐⭐⭐ |
-| **迷宫求解** | 回溯法：试探→入栈→成功/失败→回溯出栈 | ⭐⭐⭐⭐ |
-| **表达式求值** | 算符优先法：操作数栈 + 运算符栈 + 优先级比较 | ⭐⭐⭐⭐⭐ |
+| **括号匹配** | 左括号入栈，右括号匹配则出栈，最后栈空则合法 | ⭐⭐⭐⭐ |
+| **迷宫求解** | 回溯法：试探→入栈→成功/失败→回溯出栈 | ⭐⭐⭐ |
+| **表达式求值** | 算符优先法：操作数栈 + 运算符栈 + 优先级比较 | ⭐⭐⭐⭐ |
 
 **📌 表达式求值的巧妙之处：**
 - 使用**两个栈**（OPTR 运算符栈 + OPND 操作数栈）
@@ -414,9 +418,9 @@ p->next = s;          // 再让前驱指向新结点
 | 堆分配串 | 长度灵活 | 需动态管理内存 | 实际开发更多 |
 | 块链串 | 插入/删除方便 | 存储密度低 | 不常用 |
 
-#### 核心：KMP 算法 ★★★★★
+#### 核心：KMP 算法 ★★★
 
-这是 408 数据结构中**最难以理解**但也**最重要**的算法之一。
+这是 408 数据结构中**最难以理解**的算法之一，选择题几乎每年 1 道。
 
 **📌 核心思想：**
 - 暴力匹配（BF）在失配时主串 i 回溯，模式串 j 重置为 1，时间复杂度 O(m×n)
@@ -676,11 +680,15 @@ Dᵏ[i][j] = min(Dᵏ⁻¹[i][j], Dᵏ⁻¹[i][k] + Dᵏ⁻¹[k][j])  (经过 k 
 
 ### 第9章：查找
 
-| 查找算法 | 时间复杂度 | 前提 | 408 频率 |
+| 查找算法/结构 | 时间复杂度 | 前提 | 408 频率 |
 |----------|-----------|------|----------|
-| **顺序查找** | O(n) | 无 | ⭐⭐⭐ |
-| **折半查找** | O(log n) | 有序表 | ⭐⭐⭐⭐⭐ |
-| **分块查找** | O(log m + n/m) | 块间有序 | ⭐⭐⭐ |
+| **顺序查找** | O(n) | 无 | ⭐⭐ |
+| **折半查找** | O(log n) | 有序表 | ⭐⭐⭐⭐ |
+| **分块查找** | O(log m + n/m) | 块间有序 | ⭐⭐ |
+| **B 树 / B+ 树** | O(log n) | — | ⭐⭐⭐⭐ |
+| **哈希表** | O(1) 平均 | 散列函数 | ⭐⭐⭐⭐ |
+
+> **B 树 / B+ 树是近年热门考点**，常出现在选择题和大题中（插入/删除/查找过程）。
 
 #### 顺序查找
 
@@ -857,35 +865,6 @@ if (!p || j > i) return ERROR;
 // 链栈相比顺序栈无需预估容量，
 // 更适合理解动态内存结构
 ```
-
----
-
-## 📋 变更记录
-
-### 2024 重构说明
-
-本项目进行了全面重构，主要变更如下：
-
-| 变更项 | 说明 |
-|--------|------|
-| **目录重组** | 按 `ChapterXX_主题/子主题/` 重新组织，更清晰、更 GitHub 友好 |
-| **已注释 system("pause")** | 全部 .c/.cpp 文件中 `system("pause")` 已注释，便于直接编译运行 |
-| **更新 include 路径** | 所有 `#include` 相对路径已适配新目录结构 |
-| **README 重写** | 完整阅读分析，包含每章总结、教学价值分析、巧妙实现提取 |
-| **新增 Status.h** | 集中管理全局状态码，统一置于 `Include/` 目录 |
-
-### 已注释 system("pause") 的文件
-
-共注释 **67 处** `system("pause")`，分布于：
-
-- 第1章：3 个文件
-- 第2章：8 个文件
-- 第3章：17 个文件
-- 第4章：6 个文件
-- 第5章：9 个文件
-- 第6章：7 个文件
-- 第7章：17 个文件
-
 ---
 
 ## 🤝 贡献
