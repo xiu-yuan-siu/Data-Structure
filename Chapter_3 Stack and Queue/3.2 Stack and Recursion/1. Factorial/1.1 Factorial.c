@@ -20,6 +20,6 @@ int main()
     scanf("%d", &m);
     int res = Fact(m);
     printf("%d 的阶乘 = %d\n", m, res);
-    system("pause");
+    // system("pause");
     return 0;
 }

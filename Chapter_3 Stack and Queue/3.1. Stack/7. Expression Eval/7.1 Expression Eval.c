@@ -190,6 +190,6 @@ int EvaluateExpression()
 int main() {
     printf("请输入表达式 (案例: 3*(7-2)#): ");
     printf("结果: %d\n", EvaluateExpression());
-    system("pause");
+    // system("pause");
     return 0;
 }

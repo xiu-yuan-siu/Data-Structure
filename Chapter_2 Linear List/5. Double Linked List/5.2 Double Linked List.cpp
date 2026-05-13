@@ -325,6 +325,6 @@ int main() {
         cerr << "发生错误: " << e.what() << endl;
     }
 
-    system("pause");
+    // system("pause");
     return 0;
 }

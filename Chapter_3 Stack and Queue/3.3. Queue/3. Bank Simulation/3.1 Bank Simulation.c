@@ -302,6 +302,6 @@ int main()
 
     Bank_Simulation();
 
-    system("pause");
+    // system("pause");
     return 0;
 }

@@ -90,6 +90,6 @@ int main()
 {
     cout << "请输入表达式(如: 3*(7-2)#): ";
     cout << evaluateExpression() << endl;
-    system("pause");
+    // system("pause");
     return 0;
 }

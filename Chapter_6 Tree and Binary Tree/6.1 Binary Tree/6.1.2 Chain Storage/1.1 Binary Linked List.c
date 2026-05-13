@@ -481,6 +481,6 @@ int main() {
     DestroyBiTree(&T);
     printf("树是否已被销毁? %s (期望: 是)\n", BiTreeEmpty(T) ? "是" : "否");
 
-    system("pause");
+    // system("pause");
     return 0;
 }

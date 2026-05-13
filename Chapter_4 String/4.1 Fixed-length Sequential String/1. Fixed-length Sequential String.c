@@ -298,6 +298,6 @@ void PrintString(SString S) {
 //     DestroyString(&S);
 //     PrintString(S);
 
-//     system("pause");
+//     // system("pause");
 //     return 0;
 // }

@@ -242,6 +242,6 @@ int main() {
     if (MazePath(start, end) == FALSE) {
         printf("\n测试通过：算法正确识别无解迷宫。\n");
     }
-    system("pause");
+    // system("pause");
     return 0;
 }

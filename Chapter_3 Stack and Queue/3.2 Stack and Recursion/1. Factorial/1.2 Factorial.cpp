@@ -21,6 +21,6 @@ int main()
     int res = Fact(n);
     cout << n << " 的阶乘 = " << res << endl;
     
-    system("pause");
+    // system("pause");
     return 0;
 }

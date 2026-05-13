@@ -95,6 +95,6 @@ int main() {
         cout << "捕获到异常: " << e.what() << endl;
     }
  
-    system("pause");
+    // system("pause");
     return 0;
 }

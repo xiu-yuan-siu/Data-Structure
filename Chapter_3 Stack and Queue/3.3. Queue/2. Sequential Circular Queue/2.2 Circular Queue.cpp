@@ -217,6 +217,6 @@ int main()
     TestCircularBehavior();
     Testclear();
 
-    system("pause");
+    // system("pause");
     return 0;
 }

@@ -116,6 +116,6 @@ int main() {
     BinaryTreeToForest(root);
 
     printf("\n测试完成。\n");
-    system("pause");
+    // system("pause");
     return 0;
 }

@@ -70,6 +70,6 @@ int main() {
         printf("共找到 %d 个解\n", solutionCount);
     }
     
-    system("pause");
+    // system("pause");
     return 0;
 }

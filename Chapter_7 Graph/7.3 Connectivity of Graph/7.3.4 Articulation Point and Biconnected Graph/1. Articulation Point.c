@@ -129,7 +129,7 @@ int main() {
     for(int i = 0; i < G.vexnum; i++) {
         printf("%c\t%d\t%d\n", G.vertices[i].data, visited[i], low[i]);
     }
-    system("pause");
+    // system("pause");
     return 0;
 }
 

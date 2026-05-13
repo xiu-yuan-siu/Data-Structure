@@ -107,6 +107,6 @@ int main() {
     MGraph G;
     CreateGraph716(&G);  
     MiniSpanTree_PRIM(G, '1');
-    system("pause");
+    // system("pause");
     return 0;
 }

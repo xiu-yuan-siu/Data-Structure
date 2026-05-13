@@ -361,6 +361,6 @@ int main()
     Bank bank;
     bank.Simulation();
 
-    system("pause");
+    // system("pause");
     return 0;
 }

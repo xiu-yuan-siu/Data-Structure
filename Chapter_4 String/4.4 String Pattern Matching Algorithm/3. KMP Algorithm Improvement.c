@@ -226,6 +226,6 @@ int main()
     
     printf("\n==========================================\n");
     printf("结论：当模式串有大量重复字符时，nextval 能显著减少回溯次数！\n");
-    system("pause");
+    // system("pause");
     return 0;
 }

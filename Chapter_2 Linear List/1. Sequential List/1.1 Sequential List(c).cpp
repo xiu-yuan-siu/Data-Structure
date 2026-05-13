@@ -366,6 +366,6 @@ int main() {
     DestroyList(&L);
     printf("所有列表已销毁，程序正常结束。\n");
 
-    system("pause");
+    // system("pause");
     return 0;
 }

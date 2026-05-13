@@ -32,6 +32,6 @@ int main()
     int n = 3;
     hanoi(3, 'X', 'Y', 'Z');
 
-    system("pause");
+    // system("pause");
     return 0;
 }

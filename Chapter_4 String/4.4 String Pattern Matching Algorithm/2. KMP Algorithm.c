@@ -172,6 +172,6 @@ int main()
     printf("匹配结果: %d (期望: 1)\n\n", result);
     
     printf("========== 测试结束 ==========\n");
-    system("pause");
+    // system("pause");
     return 0;
 }

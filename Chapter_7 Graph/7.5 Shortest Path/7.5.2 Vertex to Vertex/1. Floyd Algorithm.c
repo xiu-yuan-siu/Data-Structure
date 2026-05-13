@@ -142,6 +142,6 @@ int main() {
     ShortestPath_FLOYD(G, &P, &D);
     PrintResult(G, P, D);
 
-    system("pause");
+    // system("pause");
     return 0;
 }

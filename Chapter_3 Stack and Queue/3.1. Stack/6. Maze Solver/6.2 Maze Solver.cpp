@@ -160,6 +160,6 @@ int main()
     {
         cout << "无解。\n";
     }
-    system("pause");
+    // system("pause");
     return 0;
 }

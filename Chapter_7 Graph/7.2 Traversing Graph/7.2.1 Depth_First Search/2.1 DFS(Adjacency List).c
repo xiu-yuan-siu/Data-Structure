@@ -154,6 +154,6 @@ int main() {
     printf("\n========== 测试执行完毕 ==========\n");
     
     freopen("CON", "r", stdin); 
-    system("pause");
+    // system("pause");
     return 0;
 }

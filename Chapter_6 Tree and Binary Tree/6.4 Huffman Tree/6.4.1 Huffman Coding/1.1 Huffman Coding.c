@@ -247,6 +247,6 @@ int main() {
     free(HC3);
     free(HT3);
 
-    system("pause");
+    // system("pause");
     return 0;
 }

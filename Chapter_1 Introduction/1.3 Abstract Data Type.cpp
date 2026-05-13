@@ -76,6 +76,6 @@ int main()
         cout << "分母为 0, 不能进行除法!" << endl;
     }
     
-    system("pause");
+    // system("pause");
     return 0;
 }

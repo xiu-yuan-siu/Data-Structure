@@ -262,6 +262,6 @@ int main() {
     DestroyList(&L1);
     if (L1 == NULL) printf("List successfully destroyed.\n");
 
-    system("pause");
+    // system("pause");
     return 0;
 }

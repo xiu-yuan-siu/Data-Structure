@@ -269,6 +269,6 @@ int main() {
     // 测试 5: 边界 - 结果为 0
     Polynomial pZero = p3 - p3;
     cout << "P3 - P3: " << pZero << endl;
-    system("pause");
+    // system("pause");
     return 0;
 }

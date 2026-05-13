@@ -226,6 +226,6 @@ int main() {
         p = space[p].cur;
     }
     printf("\n");
-    system("pause");
+    // system("pause");
     return 0;
 }

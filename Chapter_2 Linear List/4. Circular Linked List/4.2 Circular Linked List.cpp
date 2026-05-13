@@ -238,6 +238,6 @@ int main() {
     } catch (const exception& e) {
         cerr << "Exception: " << e.what() << endl;
     }
-    system("pause");
+    // system("pause");
     return 0;
 }

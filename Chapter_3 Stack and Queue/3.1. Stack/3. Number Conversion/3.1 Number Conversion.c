@@ -116,6 +116,6 @@ int main()
     conversion(N, d);
     printf("\n");
     
-    system("pause");
+    // system("pause");
     return 0;
 }

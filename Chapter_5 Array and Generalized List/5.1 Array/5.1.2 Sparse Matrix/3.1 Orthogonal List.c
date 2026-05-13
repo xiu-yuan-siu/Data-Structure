@@ -410,6 +410,6 @@ int main()
     
     printf("\n所有测试完成！\n");
     
-    system("pause");
+    // system("pause");
     return 0;
 }

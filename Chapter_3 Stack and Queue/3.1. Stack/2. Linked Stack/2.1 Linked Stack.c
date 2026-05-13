@@ -165,6 +165,6 @@ int main()
     printf("是否为空栈: %s\n", StackEmpty(S) ? "TRUE" : "FALSE");
     PrintStack(S);
 
-    system("pause");
+    // system("pause");
     return 0;
 }

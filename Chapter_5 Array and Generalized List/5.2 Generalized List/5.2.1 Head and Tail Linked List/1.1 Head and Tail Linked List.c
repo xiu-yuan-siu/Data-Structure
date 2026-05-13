@@ -347,6 +347,6 @@ int main() {
     printf("销毁L后: L=%p (期望NULL/0)\n\n", (void*)L);
     
     printf("========== 所有测试完成 ==========\n");
-    system("pause");
+    // system("pause");
     return 0;
 }

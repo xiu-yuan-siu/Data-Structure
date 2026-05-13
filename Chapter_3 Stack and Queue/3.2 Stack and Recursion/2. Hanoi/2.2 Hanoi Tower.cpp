@@ -27,6 +27,6 @@ int main()
     int n = 2;
     hanoi(n, 'X', 'Y', 'Z');
 
-    system("pause");
+    // system("pause");
     return 0;
 }

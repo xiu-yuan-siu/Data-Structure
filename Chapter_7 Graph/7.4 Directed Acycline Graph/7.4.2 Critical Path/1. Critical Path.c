@@ -204,7 +204,7 @@ int main() {
     } else {
         printf("图中存在回路，无法计算关键路径。\n");
     }
-    system("pause");
+    // system("pause");
     return 0;
 }
 

@@ -137,6 +137,6 @@ int main() {
     printf("越界合并 Merge(0, 1): %s\n", merge_mfset(&S, 0, 1) == ERROR ? "捕获到ERROR" : "失败");
     printf("越界混合 Mix(1, 100): %s\n", mix_mfset(&S, 1, 100) == ERROR ? "捕获到ERROR" : "失败");
 
-    system("pause");
+    // system("pause");
     return 0;
 }

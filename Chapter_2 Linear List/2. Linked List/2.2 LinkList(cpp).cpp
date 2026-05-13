@@ -388,6 +388,6 @@ int main() {
     // 10. 销毁 - 离开作用域时由 ~LinkList() 自动完成
     cout << "\n--- All Tests Passed! ---\n";
     
-    system("pause");
+    // system("pause");
     return 0;
 }

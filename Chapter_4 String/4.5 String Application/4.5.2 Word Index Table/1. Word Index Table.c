@@ -330,6 +330,6 @@ int main()
     
     printf("索引表生成完成！共 %d 个关键词\n", idxlist.last);
     
-    system("pause");
+    // system("pause");
     return 0;
 }

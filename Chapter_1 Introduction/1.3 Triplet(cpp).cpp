@@ -199,6 +199,6 @@ int main() {
     cout << endl;
     cout << "所有测试完成。程序结束，对象自动析构。" << endl;
     cout << endl;
-    system("pause");
+    // system("pause");
     return 0;
 }

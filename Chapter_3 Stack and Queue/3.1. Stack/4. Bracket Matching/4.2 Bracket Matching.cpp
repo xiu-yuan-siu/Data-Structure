@@ -160,6 +160,6 @@ int main() {
     catch (const exception& e) {
         cerr << "发生异常: " << e.what() << endl;
     }
-    system("pause");
+    // system("pause");
     return 0;
 }

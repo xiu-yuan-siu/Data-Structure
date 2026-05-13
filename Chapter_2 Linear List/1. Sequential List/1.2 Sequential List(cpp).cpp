@@ -398,6 +398,6 @@ int main()
 
     cout << "\n===== 测试完成 =====" << endl;
 
-    system("pause");
+    // system("pause");
     return 0;
 }

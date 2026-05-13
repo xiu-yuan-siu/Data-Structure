@@ -116,6 +116,6 @@ int main()
     S.conversion(N, d);
     cout << endl;
 
-    system("pause");
+    // system("pause");
     return 0;
 }

@@ -487,6 +487,6 @@ int main() {
     printf("A + (-A) 非零元个数: %d (应为0)\n", Zero.tu);
     
     printf("\n所有测试完成！\n");
-    system("pause");
+    // system("pause");
     return 0;
 }

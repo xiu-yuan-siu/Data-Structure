@@ -284,6 +284,6 @@ int main() {
     printf("P(x,y,z) = x^10y^3z^2 + 2x^6y^3z^2 + 3x^5y^2z^2 + x^4y^4z + 6x^3y^4z + 2yz + 15\n");
     
     DestroyMPList(P);
-    system("pause");
+    // system("pause");
     return 0;
 }

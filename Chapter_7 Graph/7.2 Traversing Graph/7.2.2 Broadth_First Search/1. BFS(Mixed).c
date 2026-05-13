@@ -311,6 +311,6 @@ int main() {
     printf("\n========== 所有测试执行完毕 ==========\n");
 
     freopen("CON", "r", stdin);
-    system("pause");
+    // system("pause");
     return 0;
 }

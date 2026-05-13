@@ -278,6 +278,6 @@ int main() {
     DestroyPolyn(&Pa);
 
     printf("测试全部通过！\n");
-    system("pause");
+    // system("pause");
     return 0;
 }

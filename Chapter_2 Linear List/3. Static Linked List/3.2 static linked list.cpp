@@ -195,6 +195,6 @@ int main() {
     } catch (const exception& e) {
         cerr << e.what() << endl;
     }
-    system("pause");
+    // system("pause");
     return 0;
 }

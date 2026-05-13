@@ -141,6 +141,6 @@ int main() {
     printf("\n--- 7. 销毁测试 ---\n");
     PrintQueueStatus(DestroyQueue(&Q), "DestroyQueue");
 
-    system("pause");
+    // system("pause");
     return 0;
 }

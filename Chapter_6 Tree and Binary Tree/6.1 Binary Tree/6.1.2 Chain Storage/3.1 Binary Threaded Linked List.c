@@ -124,6 +124,6 @@ int main() {
     InOrderTraverse_Thr(Thrt, Visit);
 
     printf("\n--- 测试结束 ---\n");
-    system("pause");
+    // system("pause");
     return 0;
 }

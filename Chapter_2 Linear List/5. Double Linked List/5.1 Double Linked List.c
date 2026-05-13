@@ -296,7 +296,7 @@ int main() {
     if (Lc == NULL) printf("链表 Lc 销毁成功，指针已置 NULL\n");
 
     #ifdef _WIN32
-    system("pause");
+    // system("pause");
     #endif
     
     return 0;

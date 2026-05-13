@@ -139,7 +139,7 @@ int main() {
     OLGraph G;
     CreateDG(&G);
     StronglyConnectedComponents(G);
-    system("pause");
+    // system("pause");
     return 0;
 }
 

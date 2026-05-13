@@ -397,6 +397,6 @@ int main()
     test_MultiSMatrix();
     test_Transpose();
     test_CopyDestroy();
-    system("pause");
+    // system("pause");
     return 0;
 }

@@ -224,6 +224,6 @@ int main() {
     printf("\n========== 测试执行完毕 ==========\n");
 
     freopen("CON", "r", stdin); // 恢复键盘控制
-    system("pause");
+    // system("pause");
     return 0;
 }

@@ -140,6 +140,6 @@ int main()
     DestroyTriplet(T);
     if (T == NULL) cout << "销毁成功，指针已置空" << endl;
 
-    system("pause");
+    // system("pause");
     return 0;
 }

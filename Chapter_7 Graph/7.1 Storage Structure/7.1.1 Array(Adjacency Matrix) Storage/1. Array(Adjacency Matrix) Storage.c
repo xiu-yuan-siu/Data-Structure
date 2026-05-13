@@ -271,6 +271,6 @@ int main(void)
     }
 
     DestroyGraph(&G);
-    system("pause");
+    // system("pause");
     return 0;
 }

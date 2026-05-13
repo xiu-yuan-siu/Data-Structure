@@ -113,6 +113,6 @@ int main() {
     }
 
     cout << "程序继续运行，未崩溃。" << endl;
-    system("pause");
+    // system("pause");
     return 0;
 }

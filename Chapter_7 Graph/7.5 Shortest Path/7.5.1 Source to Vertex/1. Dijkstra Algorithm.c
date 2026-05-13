@@ -166,6 +166,6 @@ int main() {
     ShortestPath_DIJ(G, v0, &P, &D);
     PrintResult(G, v0, P, D);
     
-    system("pause");
+    // system("pause");
     return 0;
 }

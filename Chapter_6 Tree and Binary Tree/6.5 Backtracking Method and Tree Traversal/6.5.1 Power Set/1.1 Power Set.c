@@ -106,7 +106,7 @@ int main() {
     
     printf("\n共 %d 个子集\n", powerSetCount);
 
-    system("pause");
+    // system("pause");
     return 0;
 }
 

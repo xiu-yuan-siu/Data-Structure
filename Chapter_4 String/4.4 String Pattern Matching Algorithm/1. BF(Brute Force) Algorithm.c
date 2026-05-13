@@ -114,6 +114,6 @@ int main()
     printf("结果: %d (期望: 0)\n", result);
     
     printf("\n========== 测试结束 ==========\n");
-    system("pause");
+    // system("pause");
     return 0;
 }

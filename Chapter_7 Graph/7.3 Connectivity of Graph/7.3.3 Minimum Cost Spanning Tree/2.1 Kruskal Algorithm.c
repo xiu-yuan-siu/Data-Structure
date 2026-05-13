@@ -132,6 +132,6 @@ int main() {
     MGraph G;
     CreateGraph716(&G);
     MiniSpanTree_KRUSKAL(G);
-    system("pause");
+    // system("pause");
     return 0;
 }

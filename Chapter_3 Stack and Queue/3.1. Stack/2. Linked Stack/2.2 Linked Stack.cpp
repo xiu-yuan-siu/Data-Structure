@@ -163,6 +163,6 @@ int main()
     S.push(200);
     S.print();
 
-    system("pause");
+    // system("pause");
     return 0;
 }

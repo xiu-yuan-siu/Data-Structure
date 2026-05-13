@@ -29,6 +29,6 @@ int main()
     ClearString(&S2);
     ClearString(&T);
     
-    system("pause");
+    // system("pause");
     return 0;
 }
